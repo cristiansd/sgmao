@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+.backgroundGrey{
+	/*position:fixed;*/
+	top:0px;
+	left:0px;
+	width:100%;
+	
+	background-color:#252830;
+
+}
+
+.navPanel{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:70px;
+	height:100%;
+	background-color:#30343E;
+}
+
+.content{
+	padding-top: 50px;
+	width: 960px;
+	display: block;
+    margin: auto;
+    position: relative;
+    padding-left: 70px;
+    height: auto;
+
+	
+}
+.content1{
+	width: 960px;
+	height: 50px;
+	display: block;
+}
+.subContent1{
+	width: auto;
+	float: right;
+}
+.lineaSeparar{
+	position: relative;
+	font-size: 12px;
+	line-height: 20px;	
+	margin-top: 300px;
+}
+.thead-light{
+	background-color: silver;
+	color: #3f3f3f;
+}
+.color-font{
+	color:silver;
+}
+.tabla{
+	overflow-y: scroll;
+	max-height: 50px;
+}

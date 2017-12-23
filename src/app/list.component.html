@@ -1,0 +1,23 @@
+
+<table class="table table-bordered table-dark table-hover color-font tabla" style = 'padding-top:10px; overflow:scroll'>
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">parte</th>
+      <th scope="col">Tipo</th>      
+      <th scope="col">Recurso</th>
+      <th scope="col">cliente</th>
+      <th scope="col">ot</th>      
+      <th scope="col">fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let parte of partes | orderBy: order'>
+      <td>{{parte.idParte}}</td>
+      <td>{{parte.tipoParte}}</td>
+      <td>{{parte.recursoParte}}</td>
+      <td>{{parte.clienteParte}}</td>
+      <td>{{parte.otParte}}</td>      
+      <td>{{parte.fechaParte}}</td>
+    </tr>    
+  </tbody>
+</table>
