@@ -66,20 +66,20 @@ export class DataService {
       return partes;
     }
 
-  	getPartesPorCliente(data:Parte[], filtro:string, valor:string){
+  	getPartesPorCliente(datoHeredado:any[], data:Parte[], filtro:string, valor:string){
   		var partes = [];
       var datas = [];
       var datos;
   		partes['partes'] = new Array();
   		partes['labels'] = new Array();
-      partes['totalPartes'] = new Array();
+      partes['total'] = new Array();
       switch (filtro) {
 
         case "cliente":
           datos= data['clientes'].find(ft=>ft.nombreCliente===valor).idCliente;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
               .filter(ft=>ft.clienteParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['clientes']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.clienteParte === data['clientes'][i].idCliente)).length);
@@ -88,9 +88,9 @@ export class DataService {
 
         case "recurso":
           datos= data['recursos'].find(ft=>ft.nombreRecurso===valor).idRecurso;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
               .filter(ft=>ft.recursoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['clientes']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.clienteParte === data['clientes'][i].idCliente)).length);
@@ -99,9 +99,9 @@ export class DataService {
 
         case "tipo":
           datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['clientes']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.clienteParte === data['clientes'][i].idCliente)).length);
@@ -123,18 +123,19 @@ export class DataService {
       return partes; 
   	}
 
-  	getPartesPorRecurso(data:Parte[], filtro:string, valor:string){
+  	getPartesPorRecurso(datoHeredado:any[], data:Parte[], filtro:string, valor:string){
       var partes = [];
       var datas = [];
       var datos;
       partes['partes'] = new Array();
       partes['labels'] = new Array();
+      partes['total'] = new Array();
       switch (filtro) {        
         case "recurso":
           datos= data['recursos'].find(ft=>ft.nombreRecurso===valor).idRecurso;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
               .filter(ft=>ft.recursoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['recursos']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
@@ -143,9 +144,9 @@ export class DataService {
 
         case "tipo":
           datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['recursos']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
@@ -154,9 +155,9 @@ export class DataService {
 
         case "cliente":
           datos= data['clientes'].find(ft=>ft.nombreCliente===valor).idCliente;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
             .filter(ft=>ft.clienteParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['recursos']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
@@ -177,20 +178,21 @@ export class DataService {
       return partes;       
   	}
 
-  	getPartesPortipo(data:Parte[], filtro:string, valor:string){
+  	getPartesPortipo(datoHeredado:any[], data:Parte[], filtro:string, valor:string){
   		var partes = [];
       var datas = [];
       var datos;
       partes['partes'] = new Array();
       partes['labels'] = new Array();
+      partes['total'] = new Array();
       
       switch (filtro) {
 
         case "recurso":
           datos= data['recursos'].find(ft=>ft.nombreRecurso===valor).idRecurso;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
               .filter(ft=>ft.recursoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['tipoParte']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.tipoParte === data['tipoParte'][i].idTipo)).length);
@@ -199,20 +201,20 @@ export class DataService {
 
         case "tipo":
           datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['tipoParte']){
-            partes['partes'].push(Object.keys(datas[0]
+              partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.tipoParte === data['tipoParte'][i].idTipo)).length);
           }
         break;
 
         case "cliente":
           datos= data['clientes'].find(ft=>ft.nombreCliente===valor).idCliente;
-          datas.push(data['partes']
+          datas.push(datoHeredado[0]
             .filter(ft=>ft.clienteParte === datos));
-          partes['totalPartes'] = datas;
+          partes['total'] = datas;
           for(let i in data['tipoParte']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.tipoParte === data['tipoParte'][i].idTipo)).length);

@@ -32,6 +32,7 @@ export class MyChartComponent implements OnInit {
   myChart3;
   datas = [];
   datos = [];
+  datosHeredados = [];
   
 
 
@@ -40,7 +41,7 @@ export class MyChartComponent implements OnInit {
   ngOnInit(): void {
     this.datos[0] = new Array();
     this.datos[1] = new Array();
-    this.getPartes('','');
+    this.getPartes(true, '','');
   } 
 
 
@@ -74,7 +75,7 @@ export class MyChartComponent implements OnInit {
           this.destroyCharts();
 
           this.sharingData.setPrueba(this.datos);
-          this.getPartes('recurso',label);
+          this.getPartes(false, 'recurso',label);
 
   }
 
@@ -108,7 +109,7 @@ export class MyChartComponent implements OnInit {
 
           this.sharingData.setPrueba(this.datos);
 
-          this.getPartes('tipo',label);
+          this.getPartes(false, 'tipo',label);
 
   }
 
@@ -142,7 +143,7 @@ export class MyChartComponent implements OnInit {
 
           this.sharingData.setPrueba(this.datos);
 
-          this.getPartes('cliente',label);
+          this.getPartes(false, 'cliente',label);
 
   }
 
@@ -152,21 +153,41 @@ export class MyChartComponent implements OnInit {
     this.myChart3.destroy();
   }
 
-  public getPartes(filtro:string, valor:string): void{
+  public getPartes(inicial:boolean, filtro:string, valor:string): void{
     
     this.dataService.getPartes().subscribe((data) => {
+        if(this.datosHeredados.length == 0){
+          this.datosHeredados.push(data['partes']);          
+        }
+
+          switch (filtro) {
+           case "recurso":
+             this.datosHeredados = this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['total'];
+             break;
+
+           case "tipo":
+             this.datosHeredados = this.dataService.getPartesPortipo(this.datosHeredados, data,filtro, valor)['total'];
+             break;
+
+           case "cliente":
+             this.datosHeredados = this.dataService.getPartesPorCliente(this.datosHeredados, data,filtro, valor)['total'];
+             break;
+         }
+
 
           //DESCARGAMOS LOS RECURSOS
-          this.partesPorRecuros = this.dataService.getPartesPorRecurso(data, filtro, valor)['partes'];
-          this.labelsRecursos = this.dataService.getPartesPorRecurso(data, filtro, valor)['labels'];
+          this.partesPorRecuros = this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['partes'];
+          this.labelsRecursos = this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['labels'];
+          
 
           //DESCARGAMOS LOS CLIENTES
-          this.partesPorCliente = this.dataService.getPartesPorCliente(data, filtro, valor)['partes'];
-          this.labelClientes = this.dataService.getPartesPorCliente(data,filtro, valor)['labels'];
+          this.partesPorCliente = this.dataService.getPartesPorCliente(this.datosHeredados, data, filtro, valor)['partes'];
+          this.labelClientes = this.dataService.getPartesPorCliente(this.datosHeredados, data,filtro, valor)['labels'];
 
           //DESCARGAMOS LOS TIPOS 
-          this.partesPorTipo = this.dataService.getPartesPortipo(data,filtro, valor)['partes'];
-          this.labelsTipos = this.dataService.getPartesPortipo(data, filtro, valor)['labels'];          
+          this.partesPorTipo = this.dataService.getPartesPortipo(this.datosHeredados, data,filtro, valor)['partes'];
+          this.labelsTipos = this.dataService.getPartesPortipo(this.datosHeredados, data, filtro, valor)['labels']; 
+
 
           this.ngAfterViewInit();          
       },
