@@ -141,7 +141,6 @@ export class MyChartComponent implements OnInit {
 
     this.changeIsBig('myChart');
 
-    this.dataService.writeLog();
     
   }
 
