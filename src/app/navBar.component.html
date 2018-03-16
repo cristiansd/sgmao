@@ -1,15 +1,2 @@
-<ul class="nav justify-content-center" style = 'padding-top:10px;padding-bottom:20px;'>
-  <li class="nav-item">
-    <a class="nav-link" href="#" (click)="orderBy('recursoParte')">Recurso</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" (click)="orderBy('clienteParte')">cliente</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" (click)="orderBy('tipoParte')">tipo</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" (click)="orderBy('otParte')">ot</a>
-  </li>
-</ul>
-<list-ordenes [texto]="order"></list-ordenes>
+
+<list-ordenes [texto]="order" id="listOrdenes" style="height:0px;"></list-ordenes>

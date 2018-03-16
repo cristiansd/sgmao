@@ -1,17 +1,29 @@
 
-<table class="table table-bordered table-dark table-hover color-font tabla" style = 'padding-top:10px; overflow:scroll'>
+<table id='table' class="table table-bordered table-dark table-hover color-font tabla" style = 'padding-top:10px; overflow:scroll;'>
   <thead class="thead-light">
     <tr>
-      <th scope="col">parte</th>
-      <th scope="col">Tipo</th>      
-      <th scope="col">Recurso</th>
-      <th scope="col">cliente</th>
-      <th scope="col">ot</th>      
-      <th scope="col">fecha</th>
+      <th scope="col">
+      <a href="#" (click)="orderBy('idParte')" ><font color="grey">Parte</font></a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="orderBy('tipoParte')"><font color="grey">Tipo</font></a>
+      </th>      
+      <th scope="col">
+        <a href="#" (click)="orderBy('recursoParte')"><font color="grey">Recurso</font></a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="orderBy('clienteParte')"><font color="grey">Cliente</font></a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="orderBy('otParte')"><font color="grey">Ot</font></a>
+      </th>      
+      <th scope="col">
+        <a href="#" (click)="orderBy('fechaParte')"><font color="grey">Fecha</font></a>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor='let parte of partes | orderBy: order'>
+    <tr *ngFor='let parte of partes | orderBy: order' (click)="clickRowList($event)">
       <td>{{parte.idParte}}</td>
       <td>{{parte.tipoParte}}</td>
       <td>{{parte.recursoParte}}</td>

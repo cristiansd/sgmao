@@ -3,7 +3,6 @@
 	top:0px;
 	left:0px;
 	width:100%;
-	
 	background-color:#252830;
 
 }
@@ -20,10 +19,9 @@
 .content{
 	padding-top: 50px;
 	width: 960px;
-	display: block;
     margin: auto;
     position: relative;
-    padding-left: 70px;
+    margin-left: 70px;
     height: auto;
 
 	

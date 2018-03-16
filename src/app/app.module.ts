@@ -28,6 +28,8 @@ import { OrderModule } from 'ngx-order-pipe';
 
 import {SharingDataService } from './sharingData.service';
 
+import { HttpModule } from '@angular/http';
+
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import {SharingDataService } from './sharingData.service';
     BrowserModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    HttpModule,
     JsonpModule,
     CommonModule,
     FormsModule,

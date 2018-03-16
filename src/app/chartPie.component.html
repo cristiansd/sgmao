@@ -1,5 +1,5 @@
-<canvas class = 'myChart' id="myChart"  (click)="clickChart1($event)"></canvas>
-<canvas class = 'myChart' id="myChart2" (click)="clickChart2($event)"></canvas>
-<canvas class = 'myChart' id="myChart3" (click)="clickChart3($event)"></canvas>
-<hr class='lineaSeparar'>
+<canvas class = 'myChart' id="myChart"  style='' (click)="clickChart1($event)" (dblclick)="dblClickChart1($event)"></canvas>
+<canvas class = 'myChart' id="myChart2" style='' (click)="clickChart2($event)" (dblclick)="dblClickChart2($event)"></canvas>
+<canvas class = 'myChart' id="myChart3" style='' (click)="clickChart3($event)" (dblclick)="dblClickChart3($event)"></canvas>
+<button type="button" id="butonRestart" class="btn btn-outline-primary btn-block" style='margin-bottom:10px;width:925px !important;display:none' (click)="restartClick($event)">Restablecer datos</button>
 		<nav-bar [recurso]="recurso"></nav-bar>	
