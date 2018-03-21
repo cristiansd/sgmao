@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import Chart from 'chart.js';
 import {DataService } from './data.service';
 import {SharingDataService } from './sharingData.service';
@@ -11,7 +11,7 @@ import {Parte} from './parte';
   styleUrls: ['./chartPie.component.css', '../../node_modules/bootstrap/dist/css/bootstrap.css'],
   providers:[DataService, SharingDataService]
 })
-export class MyChartComponent implements OnInit {
+export class MyChartComponent implements OnInit, AfterViewInit {
   
   canvas: any;
   ctx: any;
@@ -38,6 +38,8 @@ export class MyChartComponent implements OnInit {
   private filtrado = false;
   private isBig = false;
   private evt;
+  private chartWidht;
+  private chartHeight;
 
 
 
@@ -47,8 +49,9 @@ export class MyChartComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    this.getPartes(true, '','');
+    this.getPartes(true, '','');    
   } 
+
 
   private destroyCharts():void{
     console.log('metodo destroyCharts');
@@ -86,11 +89,12 @@ export class MyChartComponent implements OnInit {
     document.getElementById('myChart2').style.display = 'none';
     document.getElementById('myChart3').style.display = 'none';
     document.getElementById(idDiv).style.display = '';
-    document.getElementById(idDiv).style.width = '150%';
+    document.getElementById(idDiv).style.width = '100%';
+    document.getElementById(idDiv).style.height = '100%';
     var screenWidth = window.screen.height; 
     var chartWidth = this.mesureDiv(idDiv)['width'];
     var totalPadding = screenWidth - chartWidth;
-    var leftMargin = totalPadding/2-40;
+    var leftMargin = totalPadding/2 + 70;
     document.getElementById(idDiv).style.marginLeft = leftMargin.toString() + 'px';
   }
 
@@ -100,10 +104,12 @@ export class MyChartComponent implements OnInit {
     document.getElementById('myChart').style.display = '';
     document.getElementById('myChart2').style.display = '';
     document.getElementById('myChart3').style.display = '';
-    document.getElementById('myChart').style.width = '33.3%';
-    document.getElementById('myChart2').style.width = '33.3%';
-    document.getElementById('myChart3').style.width = '33.3%';
-    document.getElementById(idDiv).style.marginLeft = '';
+    this.canvas.width = this.chartWidht + 'px';
+    document.getElementById('myChart2').style.width = this.chartWidht + 'px';
+    document.getElementById('myChart3').style.width = this.chartWidht + 'px';
+    document.getElementById('myChart').style.height = this.chartHeight + 'px';
+    document.getElementById('myChart2').style.height = this.chartHeight + 'px';
+    document.getElementById('myChart3').style.height = this.chartHeight + 'px';
   }
 
   private holdChartMesure(idDiv:string):void{
@@ -111,7 +117,7 @@ export class MyChartComponent implements OnInit {
     if(this.isBig){
       this.centeredChart(idDiv);
     } else {
-      this.restoreChart(idDiv);
+      this.restoreChart(idDiv);  
     }
   }
 
@@ -323,7 +329,8 @@ export class MyChartComponent implements OnInit {
       });
   }
   
-  ngAfterViewInit() {  
+  ngAfterViewInit() {     
+
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     this.myChart = new Chart(this.ctx, {
@@ -417,6 +424,10 @@ export class MyChartComponent implements OnInit {
         }
       }
     });
+
+    this.chartHeight = this.canvas.clientHeight;
+    this.chartWidht = this.canvas.clientWidth;
+    console.log('altura myChart: ' + this.chartHeight + 'anchura myChart: ' + this.chartWidht);
 }
 }
 

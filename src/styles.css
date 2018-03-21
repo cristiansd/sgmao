@@ -18,21 +18,21 @@
 
 .content{
 	padding-top: 50px;
-	width: 960px;
-    margin: auto;
+	width: 75%;
     position: relative;
-    margin-left: 70px;
+    margin-left: 12.5%;
     height: auto;
 
 	
 }
 .content1{
-	width: 960px;
+	width: 75%;
 	height: 50px;
+	float:right;
 	display: block;
 }
 .subContent1{
-	width: auto;
+	width: auto;   
 	float: right;
 }
 .lineaSeparar{

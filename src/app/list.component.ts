@@ -71,7 +71,6 @@ export class listComponent implements OnDestroy, OnInit{
     if(this.valor === undefined || this.valor === ''){
 
       this.dataService.getPartes().then((data) => {
-        console.log(data);
 
           //DESCARGAMOS LOS RECURSOS
             this.partes = data['partes'];
@@ -79,7 +78,6 @@ export class listComponent implements OnDestroy, OnInit{
             this.originalDatas = data;
             var descripcionTipoParte = [];
             this.partes.push(descripcionTipoParte);
-            console.log(this.partes);
             for(let i in data['partes']){
 
             this.partes[i]['recursoParte'] = this.dataService

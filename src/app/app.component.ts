@@ -12,7 +12,7 @@ export class AppComponent implements OnInit{
   var height = window.screen.height;
   document.getElementById('backgroundGrey').style.minHeight = height.toString() + 'px';
   var center = (window.screen.width-960+50)/2;
-  document.getElementById('content').style.marginLeft = center.toString() + 'px';
+  //document.getElementById('content').style.marginLeft = center.toString() + 'px';
   //document.getElementById('content').style.marginLeft = '140px';
   }
 }
