@@ -69,17 +69,15 @@ export class listComponent implements OnDestroy, OnInit{
 
   getDatas():void{
     if(this.valor === undefined || this.valor === ''){
+      console.log()
+      //DESCARGAMOS LOS RECURSOS
 
-      this.dataService.getPartes().then((data) => {
-
-          //DESCARGAMOS LOS RECURSOS
-            this.partes = data['partes'];
-            this.data = data['partes'];
-            this.originalDatas = data;
-            var descripcionTipoParte = [];
-            this.partes.push(descripcionTipoParte);
-            for(let i in data['partes']){
-
+      this.dataService.getPartes().then((response) => {var data = response.json();
+        this.partes = data['partes'];
+        this.data = data['partes'];
+        this.originalDatas = data;
+        var descripcionTipoParte = [];
+        for (var i = 0;i < data['partes'].length; i++) {
             this.partes[i]['recursoParte'] = this.dataService
             .getConversRecursos(data, data['partes'][i]['recursoParte']);
 
@@ -90,15 +88,10 @@ export class listComponent implements OnDestroy, OnInit{
             .getConversTipos(data, data['partes'][i]['tipoParte']); 
 
             /*this.partes[i]['descripcionTipoParte'] = this.dataService
-            .getConversDescripcionTipos(data, data['partes'][i]['tipoParte']); */
-
-            this.partes[i]['otParte'] =  parseInt(this.partes[i]['otParte']);              
-            }
-    },
-      (error) => {
-          console.log(error);
-      });
-      }
+            .getConversTipos(data, data['partes'][i]['tipoParte']); */
+        }
+      })
+    }
 
       else{      
       
@@ -108,6 +101,7 @@ export class listComponent implements OnDestroy, OnInit{
               case "recurso":
 
                 var partes = this.dataService.getFilterPartesRecurso(this.originalDatas, this.data,this.valor);
+                console.log(partes[0]);
                 for(let i in partes[0]){
 
                   partes[0][i]['recursoParte'] = this.dataService

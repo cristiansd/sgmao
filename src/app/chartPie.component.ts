@@ -49,6 +49,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   } 
 
   ngOnInit(): void {
+    console.log('metodo ngOnInit chartPie.component.ts');
     this.getPartes(true, '','');    
   } 
 
@@ -104,12 +105,16 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById('myChart').style.display = '';
     document.getElementById('myChart2').style.display = '';
     document.getElementById('myChart3').style.display = '';
-    this.canvas.width = this.chartWidht + 'px';
+    document.getElementById('myChart').style.width = this.chartWidht + 'px';
     document.getElementById('myChart2').style.width = this.chartWidht + 'px';
     document.getElementById('myChart3').style.width = this.chartWidht + 'px';
     document.getElementById('myChart').style.height = this.chartHeight + 'px';
     document.getElementById('myChart2').style.height = this.chartHeight + 'px';
     document.getElementById('myChart3').style.height = this.chartHeight + 'px';
+    document.getElementById('myChart').style.marginLeft = '';
+    document.getElementById('myChart2').style.marginLeft = '';
+    document.getElementById('myChart3').style.marginLeft = '';
+    //document.getElementById(idDiv).style.width = this.chartWidht + 'px';
   }
 
   private holdChartMesure(idDiv:string):void{
@@ -124,8 +129,11 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private changeIsBig(idDiv:string):void{
     console.log('metodo changeIsBig, div: ' + idDiv);
     console.log('el valor de isBig es:' + this.isBig);
+    
+    console.log('el width de ' + idDiv + ' es ' + this.chartWidht);
     switch (this.isBig) {
       case false:
+        this.chartWidht = document.getElementById(idDiv).clientWidth;
         this.isBig = true;
         this.centeredChart(idDiv);
       break;
@@ -272,7 +280,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
  
 
   public getPartes(inicial:boolean, filtro:string, valor:string): void{
-   this.dataService.getPartes().then(data=>{
+   this.dataService.getPartes().then((response) => {var data = response.json();
     //   this.service = this.dataService.getPartes() 
 
 
@@ -421,13 +429,9 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           position: 'bottom',
             display: true,
             text: 'Partes por clientes'
-        }
+            }
       }
-    });
-
-    this.chartHeight = this.canvas.clientHeight;
-    this.chartWidht = this.canvas.clientWidth;
-    console.log('altura myChart: ' + this.chartHeight + 'anchura myChart: ' + this.chartWidht);
+    });    
 }
 }
 

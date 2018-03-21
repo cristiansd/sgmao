@@ -27,25 +27,27 @@ export class DataService {
     this.Result = [];
    }  
 
-  	private Url = 'http://savia.byethost10.com/SaviaAdmin/consultaTotalPartes.php?callback=JSONP_CALLBACK';
+  	private Url = 'http://savia.byethost10.com/SaviaAdmin/consultaTotalPartes.php?callback=JSONP_CALLBACK';    
 
-  	
-
-    
-
-  	private handleError(error: any): Promise<any> {
+  	/*private handleError(error: any): Promise<any> {
   		console.error('An error occurred', error); // for demo purposes only
   		return Promise.reject(error.message || error);
-	}
+	}*/
 
   	//getPartes():Observable<Parte[]>{
-      getPartes(){
+    getPartes(){
+      var data;
+      let params = new URLSearchParams();
+      console.log('metodo getPartes');
+    return this.jsonp.get(this.Url).toPromise()
+                /*then((response) => data = response.json());
 
-  let promise = this.jsonp.get(this.Url)
-        .map((response: any) =>
+                return data;
+        /*.map((response: any) =>
           response.json()
-        ).toPromise()
-        return promise;  
+        ).toPromise();
+        //console.log(promise);
+    //return promise;  
 
   		/*let params = new URLSearchParams();
   		
@@ -58,14 +60,16 @@ export class DataService {
 
     getFilterPartesRecurso(originalDatas:Parte[], data:Parte[],recurso:string){
       var partes = [];
-
+      console.log(originalDatas);
       var Recurso = originalDatas['recursos'].find(fd=>fd.nombreRecurso === recurso);
       var idRecurso = Recurso.idRecurso; 
       partes.push(data.filter(ft=>ft.recursoParte === recurso));
+      console.log(partes);
       for (let i in partes[0]){
         var cliente = originalDatas['clientes'].find(fd=>fd.nombreCliente === partes[0][i]['clienteParte']);
         var idCliente = cliente.idCliente;
-        var descripcionTipo = originalDatas['tipoParte'].find(fd=>fd.descripcionTipo === partes[0][i]['tipoParte']);
+        var descripcionTipo = originalDatas['tipoParte'].find(fd=>fd.nombreTipo === partes[0][i]['tipoParte']);
+        console.log(descripcionTipo);
         var idTipo = descripcionTipo.idTipo;
         partes[0][i]['recursoParte'] = idRecurso;
         partes[0][i]['clienteParte'] = idCliente;
@@ -77,7 +81,7 @@ export class DataService {
     getFilterPartesTipo(originalDatas:Parte[], data:Parte[],tipo:string){
       var partes = [];
 
-      var Tipo = originalDatas['tipoParte'].find(fd=>fd.descripcionTipo === tipo);
+      var Tipo = originalDatas['tipoParte'].find(fd=>fd.nombreTipo === tipo);
       var idTipo = Tipo.idTipo;
       partes.push(data.filter(ft=>ft.tipoParte === tipo));
       for (let i in partes[0]){
@@ -99,7 +103,7 @@ export class DataService {
       var idCliente = Cliente.idCliente;
       partes.push(data.filter(ft=>ft.clienteParte === cliente));
       for (let i in partes[0]){
-        var descripcionTipo = originalDatas['tipoParte'].find(fd=>fd.descripcionTipo === partes[0][i]['tipoParte']);
+        var descripcionTipo = originalDatas['tipoParte'].find(fd=>fd.nombreTipo === partes[0][i]['tipoParte']);
         var idTipo = descripcionTipo.idTipo;
         var recurso = originalDatas['recursos'].find(fd=>fd.nombreRecurso === partes[0][i]['recursoParte']);
         var idRecurso = recurso.idRecurso;
@@ -142,7 +146,7 @@ export class DataService {
         break;
 
         case "tipo":
-          datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
+          datos= data['tipoParte'].find(ft=>ft.nombreTipo===valor).idTipo;
           datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
           partes['total'] = datas;
@@ -188,7 +192,7 @@ export class DataService {
         break;
 
         case "tipo":
-          datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
+          datos= data['tipoParte'].find(ft=>ft.nombreTipo===valor).idTipo;
           datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
           partes['total'] = datas;
@@ -245,7 +249,7 @@ export class DataService {
         break;
 
         case "tipo":
-          datos= data['tipoParte'].find(ft=>ft.descripcionTipo===valor).idTipo;
+          datos= data['tipoParte'].find(ft=>ft.nombreTipo===valor).idTipo;
           datas.push(datoHeredado[0]
             .filter(ft=>ft.tipoParte === datos));
           partes['total'] = datas;
@@ -275,7 +279,7 @@ export class DataService {
         break;
         }
         for(let i in data['tipoParte']){
-            partes['labels'].push(data['tipoParte'][i].descripcionTipo);
+            partes['labels'].push(data['tipoParte'][i].nombreTipo);
         }
       return partes;     
   	}
@@ -300,12 +304,12 @@ export class DataService {
       return datos;
     }
 
-    getConversDescripcionTipos(datas:Parte[], tipo:string){
+    /*getConversDescripcionTipos(datas:Parte[], tipo:string){
       var datos;
 
       datos = datas['tipoParte'].find(ft=>ft.idTipo===tipo).descripcionTipo;
       return datos;
-    }
+    }*/
 
     
 }
