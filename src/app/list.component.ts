@@ -43,7 +43,7 @@ export class listComponent implements OnDestroy, OnInit{
 }
 
     prueba(){
-      console.log('esto es la prueba de hover');
+      console.log('esto es la prueba de hover');  
     }
 
     orderBy(order:string):void{
