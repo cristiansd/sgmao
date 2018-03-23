@@ -1,11 +1,11 @@
 import { Component,Input} from '@angular/core';
-import {DataService } from './data.service';
+import {DataService } from '../data.service';
 
 
 @Component({
   selector: 'nav-bar',
   templateUrl: './navBar.component.html',
-  styleUrls: ['../../node_modules/bootstrap/dist/css/bootstrap.css'],
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css'],
   providers:[DataService]
 })
 

@@ -1,0 +1,9 @@
+.timeSelector{
+	width: 80%;
+	margin:0 auto;
+	display: block;
+}
+.btn-group{
+	float:right;
+	margin-right: 10px;
+}

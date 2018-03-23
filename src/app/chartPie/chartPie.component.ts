@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import Chart from 'chart.js';
-import {DataService } from './data.service';
-import {SharingDataService } from './sharingData.service';
-import {Parte} from './parte';
+import {DataService } from '../data.service';
+import {SharingDataService } from '../sharingData.service';
+import {Parte} from '../parte';
 
 
 @Component({
   selector: 'chart-pie',
   templateUrl: './chartPie.component.html',
-  styleUrls: ['./chartPie.component.css', '../../node_modules/bootstrap/dist/css/bootstrap.css'],
+  styleUrls: ['./chartPie.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.css'],
   providers:[DataService, SharingDataService]
 })
 export class MyChartComponent implements OnInit, AfterViewInit {
@@ -89,14 +89,15 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById('myChart').style.display = 'none';
     document.getElementById('myChart2').style.display = 'none';
     document.getElementById('myChart3').style.display = 'none';
+    document.getElementById('content4').style.height = "auto";
     document.getElementById(idDiv).style.display = '';
     document.getElementById(idDiv).style.width = '100%';
     document.getElementById(idDiv).style.height = '100%';
+    document.getElementById(idDiv).style.margin = '0 auto';
     var screenWidth = window.screen.height; 
     var chartWidth = this.mesureDiv(idDiv)['width'];
     var totalPadding = screenWidth - chartWidth;
-    var leftMargin = totalPadding/2 + 70;
-    document.getElementById(idDiv).style.marginLeft = leftMargin.toString() + 'px';
+    var leftMargin = totalPadding/2 + 70;    
   }
 
   private restoreChart(idDiv:string):void{
@@ -114,6 +115,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById('myChart').style.marginLeft = '';
     document.getElementById('myChart2').style.marginLeft = '';
     document.getElementById('myChart3').style.marginLeft = '';
+    document.getElementById(idDiv).style.marginTop = '50px';
     //document.getElementById(idDiv).style.width = this.chartWidht + 'px';
   }
 

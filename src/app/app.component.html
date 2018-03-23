@@ -1,12 +1,18 @@
-<div class='backgroundGrey' id='backgroundGrey'>
-	<nav-panel></nav-panel>
-	<div class='content' id='content'>
-		<div class='content1'> 
-			<div class='subContent1'>
-				<time-selector></time-selector> 
-			</div>			
+<div class="content">
+	<div class="content1">
+		<div class="navPanelContent">
+			<nav-panel></nav-panel>
 		</div>
-		<chart-pie id='chart'></chart-pie>
-			
 	</div>
-</div>
+	<div class="content2">
+		<div class="content3">
+			<time-selector></time-selector>
+		</div>
+		<div id="content4" class="content4">
+			<chart-pie></chart-pie>
+		</div>
+		<div class="content5">
+			<list-ordenes [texto]="order" id="listOrdenes" style="height:0px;"></list-ordenes>
+		</div>
+	</div>
+<div>

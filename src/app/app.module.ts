@@ -7,12 +7,12 @@ import { FormsModule }   from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
-import { NavPanelComponent } from './navPanel.component';
-import { BotonPanelComponent } from './botonPanel.component';
-import { MyChartComponent } from './chartPie.component';
-import { TimeSelectorComponent } from './timeSelector.component';
-import { navBarComponent } from './navBar.component';
-import { listComponent } from './list.component';
+import { NavPanelComponent } from './navPanel/navPanel.component';
+import { BotonPanelComponent } from './botonPanel/botonPanel.component';
+import { MyChartComponent } from './chartPie/chartPie.component';
+import { TimeSelectorComponent } from './time-selector/timeSelector.component';
+import { navBarComponent } from './navBar/navBar.component';
+import { listComponent } from './list/list.component';
 
 import {DataService } from './data.service';
 

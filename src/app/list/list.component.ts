@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {Subscription, ISubscription} from "rxjs/Subscription";
-import {SharingDataService } from './sharingData.service';
-import {DataService } from './data.service';
-import {Parte} from './parte';
+import {SharingDataService } from '../sharingData.service';
+import {DataService } from '../data.service';
+import {Parte} from '../parte';
 import { OnDestroy } from "@angular/core";
 import "rxjs/add/operator/takeWhile";
 
@@ -11,7 +11,7 @@ import "rxjs/add/operator/takeWhile";
 @Component({
   selector: 'list-ordenes',
   templateUrl: './list.component.html',
-  styleUrls: ['../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
   providers:[DataService]
 })
 export class listComponent implements OnDestroy, OnInit{
@@ -51,7 +51,7 @@ export class listComponent implements OnDestroy, OnInit{
   }
 
     clickRowList(evt){
-      console.log('se ha pulsado linea de la lista');
+      console.log('se ha pulsado linea de la lista');  
     }
 
 

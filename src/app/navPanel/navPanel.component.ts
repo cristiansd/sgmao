@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-import { BotonPanelComponent } from './botonPanel.component';
-import { Module } from './module';
-import { ModuleService } from './module.service';
+import { BotonPanelComponent } from '../botonPanel/botonPanel.component';
+import { Module } from '../module';
+import { ModuleService } from '../module.service';
 import { OnInit } from '@angular/core';
 
 
 @Component({
   selector: 'nav-panel',
   templateUrl: './navPanel.component.html',
-  styleUrls: ['./navPanel.component.css'],
+  styleUrls: ['./navPanel.component.css'],    
   providers: [ModuleService]   
 })
 

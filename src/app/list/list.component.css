@@ -1,0 +1,10 @@
+.tabla {
+	height: 50px !important;
+	overflow: scroll;
+}
+
+.listContent{
+	height: 100%;
+	width: 80%;
+	margin:0 auto;
+}
