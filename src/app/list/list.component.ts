@@ -6,15 +6,16 @@ import {DataService } from '../data.service';
 import {Parte} from '../parte';
 import { OnDestroy } from "@angular/core";
 import "rxjs/add/operator/takeWhile";
+import { Observable } from "rxjs";
 
 
 @Component({
   selector: 'list-ordenes',
   templateUrl: './list.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
-  providers:[DataService]
+  providers:[DataService, SharingDataService]
 })
-export class listComponent implements OnDestroy, OnInit{
+export class listComponent implements OnDestroy, OnInit{ 
 
   @Input('texto') order:string;
   valor;
@@ -24,31 +25,34 @@ export class listComponent implements OnDestroy, OnInit{
   data = [];
   originalDatas = [];
   filtro;
+  pruebas:Observable<any[]>;
 
-  ngOnInit(): void {    
+ 
+
+    ngOnInit(): void {    
       this.getDatas();
-      this.sharingData.dataSource$.subscribe(data=>{
-      this.filtro = data[0];
-      this.valor = data[1];
-      //console.log(this.partes);
-      this.getDatas();
-
-    });
-
+       /*this.sharingData.dataSource$.subscribe(data=>{
+        console.log('servicio sharingData');
+        this.filtro = data[0];
+        this.valor = data[1];
+        //console.log(this.partes);
+        this.getDatas();
+      });*/
+      
     }
 
     ngOnDestroy() {
-  this.pruebaDatas.unsubscribe();
-  console.log('destroy');
-}
+      this.pruebaDatas.unsubscribe();
+      console.log('destroy');
+    }
 
     prueba(){
       console.log('esto es la prueba de hover');  
     }
 
     orderBy(order:string):void{
-    this.order = order;
-  }
+      this.order = order;
+    }
 
     clickRowList(evt){
       console.log('se ha pulsado linea de la lista');  
@@ -65,7 +69,18 @@ export class listComponent implements OnDestroy, OnInit{
     }
 
 
-  constructor(public dataService: DataService,private sharingData: SharingDataService) {}  
+  constructor(public dataService: DataService,public sharingData: SharingDataService) {
+    sharingData.dataSource$.subscribe(data=>{
+        console.log('servicio sharingData');
+        this.filtro = data[0];
+        this.valor = data[1];
+        //console.log(this.partes);
+        this.getDatas();
+      });
+  }  
+
+
+
 
   getDatas():void{
     if(this.valor === undefined || this.valor === ''){

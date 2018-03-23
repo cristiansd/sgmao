@@ -101,7 +101,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   }
 
   private restoreChart(idDiv:string):void{
-  console.log('metodo restoreChart, div: ' + idDiv);
+  console.log('metodo restoreChart, div: ' + idDiv);  
     //this.destroyCharts();    
     document.getElementById('myChart').style.display = '';
     document.getElementById('myChart2').style.display = '';
@@ -205,6 +205,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           this.getPartes(false, 'recurso',label); 
 
           this.isFiltrado();
+
+          this.sharingData.setPrueba(this.datos);  
+
+          console.log('prueba de click en chart 1');
       }
 
     },500);
@@ -331,7 +335,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
           this.datos['original'] = data;
 
-          this.sharingData.setPrueba(this.datos);    
+          //this.sharingData.setPrueba(this.datos);    
 
       },
       (error) => {
