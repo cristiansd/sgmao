@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
   selector: 'list-ordenes',
   templateUrl: './list.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
-  providers:[DataService,SharingDataService]
+  providers:[DataService]
 })
 export class listComponent implements OnDestroy, OnInit{ 
 
@@ -31,8 +31,12 @@ export class listComponent implements OnDestroy, OnInit{
 
     ngOnInit(): void {    
       this.getDatas();
-      this.sharingData.currentMessage.subscribe(message => this.message = message);
-      console.log(this.message);
+      this.sharingData.dataSource$.subscribe(res=>{
+        console.log(res)
+        this.filtro = res[0];
+        this.valor = res[1];
+        this.getDatas();
+      });
 
     }
 
@@ -64,31 +68,15 @@ export class listComponent implements OnDestroy, OnInit{
     }
 
 
-  constructor(public dataService: DataService, private sharingData: SharingDataService) {
-    /*sharingData.dataSource$.subscribe(data=>{
-        console.log('servicio sharingData');
-        this.filtro = data[0];
-        this.valor = data[1];
-        //console.log(this.partes);
-        this.getDatas();
-      });*/
-
-      /*this.subscripcion = this.sharingData.dataSource$.subscribe(message => { this.message = message; 
-      console.log('subscripction activado');
-      console.log(this.message);
-      });*/
-      
-      
-  }  
+  constructor(public dataService: DataService, private sharingData: SharingDataService) {}  
 
 
 
 
-  getDatas():void{
-    if(this.valor === undefined || this.valor === ''){
-      console.log()
+  getDatas():void{    
       //DESCARGAMOS LOS RECURSOS
-
+      if(this.valor === undefined || this.valor === ''){
+      console.log('metodo getDatas valor undefinied');
       this.dataService.getPartes().then((response) => {var data = response.json();
         this.partes = data['partes'];
         this.data = data['partes'];
@@ -112,10 +100,13 @@ export class listComponent implements OnDestroy, OnInit{
 
       else{      
       
+      console.log('metodo getDatas con valor');
 
       switch (this.filtro) {
 
               case "recurso":
+
+                console.log('el filtro es ' + this.filtro);
 
                 var partes = this.dataService.getFilterPartesRecurso(this.originalDatas, this.data,this.valor);
                 console.log(partes[0]);
@@ -138,6 +129,8 @@ export class listComponent implements OnDestroy, OnInit{
 
               case "tipo":
 
+              console.log('el filtro es ' + this.filtro);
+
                 var partes = this.dataService.getFilterPartesTipo(this.originalDatas, this.data, this.valor);
 
                 for(let i in partes[0]){
@@ -157,6 +150,8 @@ export class listComponent implements OnDestroy, OnInit{
               break;
 
               case "cliente":
+
+              console.log('el filtro es ' + this.filtro);
 
                 var partes = this.dataService.getFilterPartesCliente(this.originalDatas, this.data, this.valor);
 

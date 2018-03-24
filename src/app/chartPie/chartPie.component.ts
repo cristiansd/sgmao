@@ -43,10 +43,6 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   message:string;
 
-
-
-  
-
   constructor( private dataService: DataService, private sharingData: SharingDataService) {
   } 
 
@@ -208,9 +204,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
           this.isFiltrado();
 
-          //this.sharingData.setPrueba(this.datos);  
-
-          this.sharingData.changeMessage("Hello from Sibling");
+          this.sharingData.setDatas(this.datos); 
 
           console.log('prueba de click en chart 1');
       }
@@ -247,6 +241,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
         this.isFiltrado(); 
 
+        this.sharingData.setDatas(this.datos); 
+
+        console.log('prueba de click en chart 2');
+
       }
 
     },500);  
@@ -280,6 +278,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
         this.getPartes(false, 'cliente',label);
 
         this.isFiltrado();  
+
+        this.sharingData.setDatas(this.datos); 
+
+        console.log('prueba de click en chart 3');
 
       }
 

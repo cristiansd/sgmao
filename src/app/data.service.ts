@@ -16,7 +16,7 @@ import {HttpModule, Http, Response} from '@angular/http';
 
 @Injectable()
 
-export class DataService {
+export class DataService {  
 
   Result:Parte[];
     resultado;
