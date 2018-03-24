@@ -41,7 +41,7 @@ import { HttpModule } from '@angular/http';
     TimeSelectorComponent,
     navBarComponent,
     listComponent,
-    MyFilterPipe  
+    MyFilterPipe
 
   ],
   imports: [

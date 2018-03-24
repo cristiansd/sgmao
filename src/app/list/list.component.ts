@@ -5,7 +5,6 @@ import {SharingDataService } from '../sharingData.service';
 import {DataService } from '../data.service';
 import {Parte} from '../parte';
 import { OnDestroy } from "@angular/core";
-import "rxjs/add/operator/takeWhile";
 import { Observable } from "rxjs";
 
 
@@ -13,7 +12,7 @@ import { Observable } from "rxjs";
   selector: 'list-ordenes',
   templateUrl: './list.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
-  providers:[DataService, SharingDataService]
+  providers:[DataService,SharingDataService]
 })
 export class listComponent implements OnDestroy, OnInit{ 
 
@@ -21,24 +20,20 @@ export class listComponent implements OnDestroy, OnInit{
   valor;
   partes = [];
   pruebaDatas: ISubscription;
-  dataSubscripcion:Subscription;
+  subscripcion:Subscription;
   data = [];
   originalDatas = [];
   filtro;
-  pruebas:Observable<any[]>;
+
+  message:string;
 
  
 
     ngOnInit(): void {    
       this.getDatas();
-       /*this.sharingData.dataSource$.subscribe(data=>{
-        console.log('servicio sharingData');
-        this.filtro = data[0];
-        this.valor = data[1];
-        //console.log(this.partes);
-        this.getDatas();
-      });*/
-      
+      this.sharingData.currentMessage.subscribe(message => this.message = message);
+      console.log(this.message);
+
     }
 
     ngOnDestroy() {
@@ -69,14 +64,21 @@ export class listComponent implements OnDestroy, OnInit{
     }
 
 
-  constructor(public dataService: DataService,public sharingData: SharingDataService) {
-    sharingData.dataSource$.subscribe(data=>{
+  constructor(public dataService: DataService, private sharingData: SharingDataService) {
+    /*sharingData.dataSource$.subscribe(data=>{
         console.log('servicio sharingData');
         this.filtro = data[0];
         this.valor = data[1];
         //console.log(this.partes);
         this.getDatas();
-      });
+      });*/
+
+      /*this.subscripcion = this.sharingData.dataSource$.subscribe(message => { this.message = message; 
+      console.log('subscripction activado');
+      console.log(this.message);
+      });*/
+      
+      
   }  
 
 

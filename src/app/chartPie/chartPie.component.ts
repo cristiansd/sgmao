@@ -9,7 +9,7 @@ import {Parte} from '../parte';
   selector: 'chart-pie',
   templateUrl: './chartPie.component.html',
   styleUrls: ['./chartPie.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.css'],
-  providers:[DataService, SharingDataService]
+  providers:[DataService]
 })
 export class MyChartComponent implements OnInit, AfterViewInit {
   
@@ -41,11 +41,13 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private chartWidht;
   private chartHeight;
 
+  message:string;
+
 
 
   
 
-  constructor( private dataService: DataService, public sharingData: SharingDataService) {
+  constructor( private dataService: DataService, private sharingData: SharingDataService) {
   } 
 
   ngOnInit(): void {
@@ -206,7 +208,9 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
           this.isFiltrado();
 
-          this.sharingData.setPrueba(this.datos);  
+          //this.sharingData.setPrueba(this.datos);  
+
+          this.sharingData.changeMessage("Hello from Sibling");
 
           console.log('prueba de click en chart 1');
       }
