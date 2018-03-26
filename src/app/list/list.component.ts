@@ -7,7 +7,6 @@ import {Parte} from '../parte';
 import { OnDestroy } from "@angular/core";
 import { Observable } from "rxjs";
 
-
 @Component({
   selector: 'list-ordenes',
   templateUrl: './list.component.html',
@@ -25,17 +24,17 @@ export class listComponent implements OnDestroy, OnInit{
   originalDatas = [];
   filtro;
 
-  message:string;
+  message:string;  
 
  
 
-    ngOnInit(): void {    
+    ngOnInit(): void {  
+
       this.getDatas();
       this.sharingData.dataSource$.subscribe(res=>{
         console.log(res)
         this.filtro = res[0];
         this.valor = res[1];
-        this.getDatas();
       });
 
     }
@@ -67,9 +66,15 @@ export class listComponent implements OnDestroy, OnInit{
       return partes;
     }
 
+    getParte(data:string){
+      window.open('http://savia.byethost10.com/Savia/Php/crearPartePdf.php?idParte=' + data);
+    }
 
-  constructor(public dataService: DataService, private sharingData: SharingDataService) {}  
 
+  constructor(public dataService: DataService, private sharingData: SharingDataService) {
+  }  
+
+  
 
 
 
@@ -87,20 +92,21 @@ export class listComponent implements OnDestroy, OnInit{
             .getConversRecursos(data, data['partes'][i]['recursoParte']);
 
             this.partes[i]['clienteParte'] = this.dataService
-            .getConversClientes(data, data['partes'][i]['clienteParte']); 
+            .getConversClientes(data, data['partes'][i]['clienteParte']);
+
+            this.partes[i]['descripcionTipoParte'] = this.dataService
+            .getConversDescripcionTipos(data, data['partes'][i]['tipoParte']);  
 
             this.partes[i]['tipoParte'] = this.dataService
             .getConversTipos(data, data['partes'][i]['tipoParte']); 
-
-            /*this.partes[i]['descripcionTipoParte'] = this.dataService
-            .getConversTipos(data, data['partes'][i]['tipoParte']); */
         }
+       
       })
     }
 
       else{      
       
-      console.log('metodo getDatas con valor');
+      console.log('metodo getDatas con valor');  
 
       switch (this.filtro) {
 
@@ -172,8 +178,6 @@ export class listComponent implements OnDestroy, OnInit{
               break;
             }     
           }
-
-     
         }             
 
-      }  
+      }    

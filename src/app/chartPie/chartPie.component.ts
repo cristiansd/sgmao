@@ -40,6 +40,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private evt;
   private chartWidht;
   private chartHeight;
+  private descripcionTipo = [];
 
   message:string;
 
@@ -329,7 +330,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           //DESCARGAMOS LOS TIPOS 
           this.partesPorTipo = this.dataService.getPartesPortipo(this.datosHeredados, data,filtro, valor)['partes'];
           this.labelsTipos = this.dataService.getPartesPortipo(this.datosHeredados, data, filtro, valor)['labels']; 
-
+          this.descripcionTipo = this.dataService.getPartesPortipo(this.datosHeredados, data, filtro, valor)['descripcion']; 
 
           this.ngAfterViewInit();  
 
@@ -364,7 +365,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)'                 
               ],
-              borderWidth: 1
+              borderWidth: 1  
           }]
       },
       options: {
@@ -376,7 +377,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
         title: {
           position: 'bottom',
             display: true,
-            text: 'Parte por recursos'
+            text: 'Partes por recursos'
         }
       }
     });

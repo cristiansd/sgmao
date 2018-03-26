@@ -6,6 +6,9 @@
         <a href="#" (click)="orderBy('idParte')" ><font color="grey">Parte</font></a>
         </th>
         <th scope="col">
+          <a href="#" (click)="orderBy('otParte')"><font color="grey">Ot</font></a>
+        </th>
+        <th scope="col">
           <a href="#" (click)="orderBy('tipoParte')"><font color="grey">Tipo</font></a>
         </th>      
         <th scope="col">
@@ -13,23 +16,20 @@
         </th>
         <th scope="col">
           <a href="#" (click)="orderBy('clienteParte')"><font color="grey">Cliente</font></a>
-        </th>
-        <th scope="col">
-          <a href="#" (click)="orderBy('otParte')"><font color="grey">Ot</font></a>
-        </th>      
+        </th>              
         <th scope="col">
           <a href="#" (click)="orderBy('fechaParte')"><font color="grey">Fecha</font></a>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let parte of partes | orderBy: order' (click)="clickRowList($event)">
-        <td>{{parte.idParte}}</td>
-        <td>{{parte.tipoParte}}</td>
-        <td>{{parte.recursoParte}}</td>
-        <td>{{parte.clienteParte}}</td>
-        <td>{{parte.otParte}}</td>      
-        <td>{{parte.fechaParte}}</td>
+      <tr *ngFor='let parte of partes | orderBy: order'>
+        <td (dblclick)="getParte(parte.idParte)"><div class="tooltip">{{parte.idParte}}<span class="tooltiptext">Doble click para abrir</span></div></td>
+        <td> <div class="tooltip">{{parte.otNombre}}<span class="tooltiptext">{{parte.otDescripcion}}</span></div></td>   
+        <td> <div class="tooltip">{{parte.tipoParte}}<span class="tooltiptext">{{parte.descripcionTipoParte}}</span></div></td>         
+        <td><div class="tooltip">{{parte.recursoParte}}</div></td>
+        <td><div class="tooltip">{{parte.clienteParte}}</div></td>          
+        <td><div class="tooltip">{{parte.fechaParte}}</div></td>
       </tr>    
     </tbody>
   </table>

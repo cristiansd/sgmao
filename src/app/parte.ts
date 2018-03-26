@@ -6,6 +6,7 @@ constructor(
   public fechaParte: string,
   public numSemanaParte: number,
   public otParte: number,
+  public otNombre: string,
   public clienteParte: string,
   public tipoParte: string,
   public descripcionTipoParte: string,

@@ -54,6 +54,7 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     OrderModule
     
+    
   ],
   providers:[DataService, SharingDataService],
   bootstrap: [AppComponent]

@@ -234,6 +234,7 @@ export class DataService {
       partes['partes'] = new Array();
       partes['labels'] = new Array();
       partes['total'] = new Array();
+      partes['descripcion'] = new Array();
       
       switch (filtro) {
 
@@ -280,6 +281,7 @@ export class DataService {
         }
         for(let i in data['tipoParte']){
             partes['labels'].push(data['tipoParte'][i].nombreTipo);
+            partes['descripcion'].push(data['tipoParte'][i].descripcionTipo);
         }
       return partes;     
   	}
@@ -304,12 +306,12 @@ export class DataService {
       return datos;
     }
 
-    /*getConversDescripcionTipos(datas:Parte[], tipo:string){
+    getConversDescripcionTipos(datas:Parte[], tipo:string){
       var datos;
 
       datos = datas['tipoParte'].find(ft=>ft.idTipo===tipo).descripcionTipo;
       return datos;
-    }*/
+    }
 
     
 }
