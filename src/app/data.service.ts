@@ -9,7 +9,7 @@ import {Parte} from './parte';
 
 import 'rxjs/add/operator/toPromise';
 
-import {HttpModule, Http, Response} from '@angular/http';
+import {HttpModule, Http, Response} from '@angular/http';  
 
 
 
