@@ -9,9 +9,9 @@ export class AppComponent implements OnInit{
   title = 'app';
 
   ngOnInit(): void {
- /* var screenHeight = window.screen.height;
+  var screenHeight = window.screen.height;
   var screenWidht = window.screen.width;
-  var backgroundGreyWidht = document.getElementById('backgroundGrey');
+  /*var backgroundGreyWidht = document.getElementById('backgroundGrey');
   var contentDiv = document.getElementById('content');
   var content1Div = document.getElementById('content1');
   var chartContent = document.getElementById('chartContent');

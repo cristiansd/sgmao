@@ -32,7 +32,7 @@ export class listComponent implements OnDestroy, OnInit{
 
       this.getDatas();
       this.sharingData.dataSource$.subscribe(res=>{
-        console.log(res)
+        //console.log(res)
         this.filtro = res[0];
         this.valor = res[1];
       });

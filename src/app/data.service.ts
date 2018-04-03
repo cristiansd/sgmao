@@ -91,7 +91,7 @@ export class DataService {
         var idRecurso = recurso.idRecurso;
         partes[0][i]['recursoParte'] = idRecurso;
         partes[0][i]['clienteParte'] = idCliente;
-        partes[0][i]['tipoParte'] = idTipo;
+        partes[0][i]['tipoParte'] = idTipo;   
       }
       return partes;
     }

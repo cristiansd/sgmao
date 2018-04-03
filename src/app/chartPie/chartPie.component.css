@@ -1,6 +1,6 @@
 .myChart{
-	/*height: 100%;*/
-	width: 33%;
+	height: 100% !important;
+	width: 33% !important;
 	float:left;
  	margin-top:50px;
  	/*padding-bottom: 50px;*/
