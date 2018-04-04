@@ -156,6 +156,16 @@ export class DataService {
           }
         break;
 
+        case "estado":
+          datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.estadoParte === datos));
+          partes['total'] = datas;
+          for(let i in data['estados']){
+            partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.esatdoParte === data['estados'][i].idEstado)).length);
+          }
+
         default:
           for(let i in data['clientes']){        
             partes['partes'].push(Object.keys(data['partes']
@@ -210,6 +220,17 @@ export class DataService {
           for(let i in data['recursos']){
             this.partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
+          }
+        break;
+
+        case "estado":
+          datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.estadoParte === datos));
+          partes['total'] = datas;
+          for(let i in data['estados']){
+            this.partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.recursoParte === data['estados'][i].idEstado)).length);
           }
         break;
 
@@ -271,6 +292,15 @@ export class DataService {
           }
         break;
 
+        case "estado":
+          datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.estadoParte === datos));
+          partes['total'] = datas;
+          for(let i in data['estados']){
+            partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.esatdoParte === data['estados'][i].idEstado)).length);
+          }
 
         default:
           for(let i in data['tipoParte']){
@@ -285,6 +315,68 @@ export class DataService {
         }
       return partes;     
   	}
+
+    getPartesPorEstado(datoHeredado:any[], data:Parte[], filtro:string, valor:string){
+      var partes = [];
+      var datas = [];
+      var datos;
+      this.partes['partes'] = new Array();
+      this.partes['labels'] = new Array();
+      this.partes['total'] = new Array();
+     
+      switch (filtro) {        
+        case "recurso":
+          datos= data['recursos'].find(ft=>ft.nombreRecurso===valor).idRecurso;
+          datas.push(datoHeredado[0]
+              .filter(ft=>ft.recursoParte === datos));
+          this.partes['total'] = datas;
+          for(let i in data['recursos']){
+            this.partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
+          }
+        break;
+
+        case "tipo":
+          datos= data['tipoParte'].find(ft=>ft.nombreTipo===valor).idTipo;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.tipoParte === datos));
+          partes['total'] = datas;
+          for(let i in data['recursos']){
+            this.partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
+          }
+        break;
+
+        case "cliente":
+          datos= data['clientes'].find(ft=>ft.nombreCliente===valor).idCliente;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.clienteParte === datos));
+          partes['total'] = datas;
+          for(let i in data['recursos']){
+            this.partes['partes'].push(Object.keys(datas[0]
+              .filter(ft=>ft.recursoParte === data['recursos'][i].idRecurso)).length);
+          }
+        break;
+
+        case "estado":
+          datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
+          datas.push(datoHeredado[0]
+            .filter(ft=>ft.estadoParte === datos));
+          partes['total'] = datas;
+
+
+        default:
+          for(let i in data['estados']){
+            this.partes['partes'].push(Object.keys(data['partes']
+            .filter(ft=>ft.recursoParte === data['estados'][i].idRecurso)).length);
+          }
+        break;
+        }
+        for(let i in data['recursos']){
+            this.partes['labels'].push(data['recursos'][i].nombreRecurso);
+        }
+      return this.partes;       
+    }
 
     getConversRecursos(datas:Parte[], recurso:string){
       var datos;

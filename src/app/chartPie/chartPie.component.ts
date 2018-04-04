@@ -22,6 +22,8 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   labelsRecursos = [];
   partesPorTipo = [];
   labelsTipos = [];
+  partesPorEstado = [];
+  labelEstados[];
   label;
   @Input() filter:string = 'prueba';
   data=[];
@@ -30,6 +32,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   myChart;
   myChart2;
   myChart3;
+  myChart4;
   datas = [];
   datos = [];
   datosHeredados = [];
@@ -52,6 +55,58 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     this.getPartes(true, '','');    
   } 
 
+  private clickNext(){
+     console.log("metodo clickNext");      
+     var display = document.getElementById("myChart").style.display;
+
+     switch (display) {       
+       case "block":         
+         document.getElementById("myChart").style.display = "none";
+         document.getElementById("myChart4").style.display = "block";   
+          if(this.myChart4 == undefined ){     
+         this.canvas = document.getElementById('myChart4');
+         this.ctx = this.canvas.getContext('2d');
+
+         this.myChart4 = new Chart(this.ctx, {
+         type: 'pie',
+          data: {
+            labels: this.labelEstados,
+            datasets: [{
+              label: '# of Votes',
+              data: this.partesPorEstado,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+          legend: {
+            display:false
+          },
+          responsive: false,
+          display:true,
+          title: {
+            position: 'bottom',
+            display: true,
+            text: 'Partes prueba'
+          }
+        }
+        });
+
+       }
+         break;
+     }     
+   } 
+
+
+  private clickPrevious(){
+    console.log("metodo clickPrevious");    
+    document.getElementById("myChart").style.display = "block";
+    document.getElementById("myChart4").style.display = "none";
+  }
 
   private destroyCharts():void{
     console.log('metodo destroyCharts');
@@ -88,6 +143,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById('myChart').style.display = 'none';
     document.getElementById('myChart2').style.display = 'none';
     document.getElementById('myChart3').style.display = 'none';
+    document.getElementById('myChart4').style.display = 'none';
     document.getElementById('content4').style.height = "auto";
     document.getElementById(idDiv).style.display = '';
     document.getElementById(idDiv).style.width = '100%';
@@ -105,15 +161,19 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById('myChart').style.display = '';
     document.getElementById('myChart2').style.display = '';
     document.getElementById('myChart3').style.display = '';
+    document.getElementById('myChart4').style.display = '';
     document.getElementById('myChart').style.width = this.chartWidht + 'px';
     document.getElementById('myChart2').style.width = this.chartWidht + 'px';
     document.getElementById('myChart3').style.width = this.chartWidht + 'px';
+    document.getElementById('myChart4').style.width = this.chartWidht + 'px';
     document.getElementById('myChart').style.height = this.chartHeight + 'px';
     document.getElementById('myChart2').style.height = this.chartHeight + 'px';
     document.getElementById('myChart3').style.height = this.chartHeight + 'px';
+    document.getElementById('myChart4').style.height = this.chartHeight + 'px';
     document.getElementById('myChart').style.marginLeft = '';
     document.getElementById('myChart2').style.marginLeft = '';
     document.getElementById('myChart3').style.marginLeft = '';
+    document.getElementById('myChart4').style.marginLeft = '';
     document.getElementById(idDiv).style.marginTop = '50px';
     //document.getElementById(idDiv).style.width = this.chartWidht + 'px';
   }
@@ -244,8 +304,6 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
         this.sharingData.setDatas(this.datos); 
 
-        console.log('prueba de click en chart 2');
-
       }
 
     },500);  
@@ -280,9 +338,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
         this.isFiltrado();  
 
-        this.sharingData.setDatas(this.datos); 
-
-        console.log('prueba de click en chart 3');
+        this.sharingData.setDatas(this.datos);
 
       }
 
@@ -294,6 +350,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   public getPartes(inicial:boolean, filtro:string, valor:string): void{
    this.dataService.getPartes().then((response) => {var data = response.json();
+     console.log(data);
     //   this.service = this.dataService.getPartes() 
 
 
@@ -313,13 +370,16 @@ export class MyChartComponent implements OnInit, AfterViewInit {
              this.datosHeredados = this.dataService.getPartesPorCliente(this.datosHeredados, data,filtro, valor)['total'];
              this.datos['filtro'] = 'cliente';
              break;
+             case "estado":
+             this.datosHeredados = this.dataService.getPartesPorCliente(this.datosHeredados, data,filtro, valor)['total'];
+             this.datos['filtro'] = 'estado';
+             break;
          }
 
 
           //DESCARGAMOS LOS RECURSOS
           this.partesPorRecuros = 
-          this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['partes'];
-          
+          this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['partes'];          
           this.labelsRecursos = 
           this.dataService.getPartesPorRecurso(this.datosHeredados, data, filtro, valor)['labels'];
 
@@ -331,6 +391,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           this.partesPorTipo = this.dataService.getPartesPortipo(this.datosHeredados, data,filtro, valor)['partes'];
           this.labelsTipos = this.dataService.getPartesPortipo(this.datosHeredados, data, filtro, valor)['labels']; 
           this.descripcionTipo = this.dataService.getPartesPortipo(this.datosHeredados, data, filtro, valor)['descripcion']; 
+
+          //DESCARGAMOS LOS ESTADOS
+          this.partesPorEstado = this.dataService.getPartesPorEstado(this.datosHeredados, data,filtro, valor)['partes'];
+          this.labelEstados = this.dataService.getPartesPorEstado(this.datosHeredados, data, filtro, valor)['labels']; 
 
           this.ngAfterViewInit();  
 
@@ -444,8 +508,8 @@ export class MyChartComponent implements OnInit, AfterViewInit {
             text: 'Partes por clientes'
             }
       }
-    });    
-}
+    });        
+  }
 }
 
 

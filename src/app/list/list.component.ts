@@ -97,7 +97,7 @@ export class listComponent implements OnDestroy, OnInit{
             this.partes[i]['descripcionTipoParte'] = this.dataService
             .getConversDescripcionTipos(data, data['partes'][i]['tipoParte']);  
 
-            this.partes[i]['tipoParte'] = this.dataService
+            this.partes[i]['tipoParte'] = this.dataService  
             .getConversTipos(data, data['partes'][i]['tipoParte']); 
         }
 

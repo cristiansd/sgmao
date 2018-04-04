@@ -1,7 +1,26 @@
 <div class="chartContent">
-	<canvas class = 'myChart' id="myChart"  (click)="clickChart1($event)" (dblclick)="dblClickChart1($event)"></canvas>
-	<canvas class = 'myChart' id="myChart2" (click)="clickChart2($event)" (dblclick)="dblClickChart2($event)"></canvas>
-	<canvas class = 'myChart' id="myChart3" (click)="clickChart3($event)" (dblclick)="dblClickChart3($event)"></canvas>
-	<button type="button" id="butonRestart" class="btn btn-outline-primary btn-block" style='width:80%;margin:0 auto;display:none' (click)="restartClick($event)">Restablecer datos</button>
+	<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+      		<canvas class = 'myChart' id="myChart"  (click)="clickChart1($event)" (dblclick)="dblClickChart1($event)">   	
+      		</canvas>
+			<canvas class = 'myChart' id="myChart2" (click)="clickChart2($event)" (dblclick)="dblClickChart2($event)">		
+			</canvas>
+			<canvas class = 'myChart' id="myChart3" (click)="clickChart3($event)" (dblclick)="dblClickChart3($event)">		
+			</canvas>		
+			<canvas class = 'myChart' id="myChart4" style="display:none;"(click)="clickChart4($event)"							
+				(dblclick)="dblClickChart4($event)">
+			</canvas>
+		</div>
+		<a id="previous" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" (click)=clickPrevious()>
+    		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    		<span class="sr-only">Previous</span>
+  		</a>
+  		<a id="next" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" (click)=clickNext()>
+    		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    		<span class="sr-only">Next</span>
+  		</a>
+	</div>
+	<button type="button" id="butonRestart" class="btn btn-outline-primary btn-block" style='width:80%;margin:0 auto;display:none' 	(click)="restartClick($event)">Restablecer datos
+	</button>
 </div>
 
