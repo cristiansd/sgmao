@@ -227,8 +227,6 @@ export class DataService {
 
         case "estado":
           datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
-          console.log(datos);
-          console.log(datoHeredado[0]);
           datas.push(datoHeredado[0]
             .filter(ft=>ft.estadoParte === datos));
           partes['total'] = datas;
@@ -365,13 +363,10 @@ export class DataService {
         break;
 
         case "estado":
-        console.log("esoty en case estado");
           datos= data['estados'].find(ft=>ft.nombreEstado===valor).idEstado;
-          console.log(datas);
           datas.push(datoHeredado[0]
             .filter(ft=>ft.estadoParte === datos));
           partes['total'] = datas;
-          console.log(datas[0]);
           for(let i in data['estados']){
             partes['partes'].push(Object.keys(datas[0]
               .filter(ft=>ft.estadoParte === data['estados'][i].idEstado)).length);

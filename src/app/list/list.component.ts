@@ -122,7 +122,10 @@ export class listComponent implements OnDestroy, OnInit{
                   .getConversRecursos(this.originalDatas, partes[0][i]['recursoParte']);
 
                   partes[0][i]['clienteParte'] = this.dataService
-                  .getConversClientes(this.originalDatas, partes[0][i]['clienteParte']);  
+                  .getConversClientes(this.originalDatas, partes[0][i]['clienteParte']); 
+
+                  this.partes[i]['descripcionTipoParte'] = this.dataService
+                  .getConversDescripcionTipos(this.originalDatas, partes[0][i]['tipoParte']);  
 
                   partes[0][i]['tipoParte'] = this.dataService
                   .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);                 

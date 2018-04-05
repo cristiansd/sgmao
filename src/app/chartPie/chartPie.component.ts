@@ -11,7 +11,7 @@ import {Parte} from '../parte';
   styleUrls: ['./chartPie.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.css'],
   providers:[DataService]
 })
-export class MyChartComponent implements OnInit, AfterViewInit {
+export class MyChartComponent implements OnInit, AfterViewInit { 
   
   canvas: any;
   ctx: any;
@@ -23,7 +23,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   partesPorTipo = [];
   labelsTipos = [];
   partesPorEstado = [];
-  labelEstados[];
+  labelEstados = [];
   label;
   @Input() filter:string = 'prueba';
   data=[];
@@ -59,12 +59,12 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private clickNext(){
      console.log("metodo clickNext");      
      var display = document.getElementById("myChart").style.display;
-
      switch (display) {       
-       case "block":      
+       case "block":
          document.getElementById("myChart").style.display = "none";
-         document.getElementById("myChart4").style.display = "block";      
-         this.createChart(this.myChart4, "myChart4", this.labelEstados, this.partesPorEstado, "partes por estado");
+         document.getElementById("myChart4").style.display = "block";   
+         this.createCanvas("myChart4");   
+         this.myChart4 = this.createChart(this.labelEstados, this.partesPorEstado, "partes por estado");
          break;
      }     
    } 
@@ -76,13 +76,16 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     document.getElementById("myChart4").style.display = "none";
   }
 
-  private createChart(varChart, elementChart:string, labels, datas, title:string){    
-      console.log (varChart);
-          if(varChart == undefined ){
+  private createCanvas(elementChart:string){
+    console.log("metodo createCanvas");
          this.canvas = document.getElementById(elementChart);
          this.ctx = this.canvas.getContext('2d');
+  }
 
-         varChart = new Chart(this.ctx, {
+  private createChart(labels, datas, title:string){
+    console.log("metodo createChart");
+      if(varChart == undefined ){
+         var varChart = new Chart(this.ctx, {
          type: 'pie',
           data: {
             labels: labels,
@@ -110,19 +113,20 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           }
         }
         });
-         this.varChart.push(varChart);
+         return varChart;
        }
-        console.log (this.varChart);
+        
   }
 
   private destroyCharts():void{
     console.log('metodo destroyCharts');
     this.myChart.destroy();
     this.myChart2.destroy();
-    this.myChart3.destroy();
+    this.myChart3.destroy();    
   }
 
   private isFiltrado():boolean{
+    console.log("metodo isFiltrado");
     if(!this.filtrado) {
         this.filtrado = true;
         document.getElementById('butonRestart').style.display = '';
@@ -131,6 +135,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   } 
 
   restartClick(){
+    console.log("metodo restartClick");
     location.reload(); 
     /*this.datos.splice(0); 
     this.ngOnInit();    
@@ -139,6 +144,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   }
 
   private mesureDiv(idDiv:string):number[]{
+    console.log("metodo mesureDiv");
     var mesure = [];
     mesure['width'] = document.getElementById(idDiv).clientWidth;
     mesure['height'] = document.getElementById(idDiv).clientHeight;
@@ -276,6 +282,8 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
           this.holdChartMesure('myChart');
 
+          document.getElementById('myChart4').style.display = 'none';
+
           this.getPartes(false, 'recurso',label); 
 
           this.isFiltrado();
@@ -296,7 +304,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     setTimeout(() => { 
 
       if(this.evt != 'dblclick'){
-
+        console.log(this.myChart2);
         var activePoints = this.myChart2.getElementsAtEvent(evt);
 
         if(activePoints.length > 0){
@@ -312,6 +320,8 @@ export class MyChartComponent implements OnInit, AfterViewInit {
         this.destroyCharts();
 
         this.holdChartMesure('myChart2');
+
+        document.getElementById('myChart4').style.display = 'none';
 
         this.getPartes(false, 'tipo',label);
 
@@ -349,6 +359,8 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
         this.holdChartMesure('myChart3');
 
+        document.getElementById('myChart4').style.display = 'none';
+
         this.getPartes(false, 'cliente',label);
 
         this.isFiltrado();  
@@ -385,7 +397,11 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
         this.holdChartMesure('myChart4');
 
-        this.getPartes(false, 'estado',label);
+        this.myChart4.destroy(); 
+
+        document.getElementById('myChart4').style.display = 'none';
+
+        this.getPartes(false, 'estado',label);               
 
         this.isFiltrado();  
 
@@ -465,21 +481,18 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit() {    
-
-    this.createChart(this.myChart, "myChart", this.labelsRecursos, this.partesPorRecuros, "partes por recursos"); 
-    this.createChart(this.myChart2, "myChart2", this.labelsTipos, this.partesPorTipo, "partes por tipo");
-    this.createChart(this.myChart3, "myChart3", this.labelClientes, this.partesPorCliente, "partes por cliente");
-    console.log(document.getElementById('myChart4').style.display);
-    if (document.getElementById('myChart4').style.display == 'none'){
-      console.log("esta en none")}else{
-      console.log("esta en block");
-     /* document.getElementById("myChart").style.display = "none";
-      document.getElementById("myChart4").style.display = "block";  
-      this.createChart(this.myChart4, "myChart4", this.labelEstados, this.partesPorEstado, "partes por estado");*/
-
+    this.createCanvas("myChart");
+    this.myChart = this.createChart(this.labelsRecursos, this.partesPorRecuros, "partes por recursos");
+    this.createCanvas("myChart2"); 
+    this.myChart2 = this.createChart(this.labelsTipos, this.partesPorTipo, "partes por tipo");
+    this.createCanvas("myChart3"); 
+    this.myChart3 = this.createChart(this.labelClientes, this.partesPorCliente, "partes por cliente");
+    if(this.myChart4 !== undefined){
+      this.clickNext();
     }
   }
 }
+
 
 
 
