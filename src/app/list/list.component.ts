@@ -100,8 +100,6 @@ export class listComponent implements OnDestroy, OnInit{
             this.partes[i]['tipoParte'] = this.dataService  
             .getConversTipos(data, data['partes'][i]['tipoParte']); 
         }
-
-        console.log(this.partes);
        
       })
     }

@@ -44,6 +44,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private chartWidht;
   private chartHeight;
   private descripcionTipo = [];
+  private varChart = [];
 
   message:string;
 
@@ -60,20 +61,34 @@ export class MyChartComponent implements OnInit, AfterViewInit {
      var display = document.getElementById("myChart").style.display;
 
      switch (display) {       
-       case "block":         
+       case "block":      
          document.getElementById("myChart").style.display = "none";
-         document.getElementById("myChart4").style.display = "block";   
-          if(this.myChart4 == undefined ){     
-         this.canvas = document.getElementById('myChart4');
+         document.getElementById("myChart4").style.display = "block";      
+         this.createChart(this.myChart4, "myChart4", this.labelEstados, this.partesPorEstado, "partes por estado");
+         break;
+     }     
+   } 
+
+
+  private clickPrevious(){
+    console.log("metodo clickPrevious");    
+    document.getElementById("myChart").style.display = "block";
+    document.getElementById("myChart4").style.display = "none";
+  }
+
+  private createChart(varChart, elementChart:string, labels, datas, title:string){    
+      console.log (varChart);
+          if(varChart == undefined ){
+         this.canvas = document.getElementById(elementChart);
          this.ctx = this.canvas.getContext('2d');
 
-         this.myChart4 = new Chart(this.ctx, {
+         varChart = new Chart(this.ctx, {
          type: 'pie',
           data: {
-            labels: this.labelEstados,
+            labels: labels,
             datasets: [{
               label: '# of Votes',
-              data: this.partesPorEstado,
+              data: datas,
               backgroundColor: [
                   'rgba(255, 99, 132, 1)',
                   'rgba(54, 162, 235, 1)',
@@ -91,21 +106,13 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           title: {
             position: 'bottom',
             display: true,
-            text: 'Partes prueba'
+            text: title
           }
         }
         });
-
+         this.varChart.push(varChart);
        }
-         break;
-     }     
-   } 
-
-
-  private clickPrevious(){
-    console.log("metodo clickPrevious");    
-    document.getElementById("myChart").style.display = "block";
-    document.getElementById("myChart4").style.display = "none";
+        console.log (this.varChart);
   }
 
   private destroyCharts():void{
@@ -210,7 +217,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     console.log('prueba de hover');
   }
 
-  dblClickChart1(evt){
+  private dblClickChart1(evt){
 
     this.evt = evt.type;
 
@@ -219,7 +226,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     
   }
 
-  dblClickChart2(evt){
+  private dblClickChart2(evt){
 
     this.evt = evt.type;
 
@@ -227,7 +234,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     
   }
 
-  dblClickChart3(evt){
+  private dblClickChart3(evt){
 
     this.evt = evt.type;
 
@@ -235,16 +242,24 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     
   }
 
+  private dblClickChart4(evt){
+
+    this.evt = evt.type;
+
+    this.changeIsBig('myChart4');
+    
+  }
 
 
-  clickChart1(evt){
+
+  private clickChart1(evt){
 
     this.evt = evt.type;
     
     setTimeout(() => { 
 
       if(this.evt != 'dblclick'){
-
+         console.log (this.myChart);
         var activePoints = this.myChart.getElementsAtEvent(evt);
 
           if(activePoints.length > 0){
@@ -274,7 +289,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   }
 
-  clickChart2(evt){
+   private clickChart2(evt){
 
     this.evt = evt.type;
 
@@ -310,7 +325,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   }
 
-  clickChart3(evt){
+  private clickChart3(evt){
 
     this.evt = evt.type;
 
@@ -346,11 +361,46 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   }
 
+  private clickChart4(evt){
+
+    this.evt = evt.type;
+
+    setTimeout(() => { 
+
+      if(this.evt != 'dblclick'){
+
+        var activePoints = this.myChart4.getElementsAtEvent(evt);
+
+        if(activePoints.length > 0){
+          var clickedElementindex = activePoints[0]["_index"];
+          var label = this.myChart4.data.labels[clickedElementindex];
+          var value = this.myChart4.data.datasets[0].data[clickedElementindex];
+          var color = this.myChart4.data.datasets[0].backgroundColor[clickedElementindex];
+        }
+
+        this.datos[0] = 'estado';
+        this.datos[1] = label;         
+
+        this.destroyCharts();
+
+        this.holdChartMesure('myChart4');
+
+        this.getPartes(false, 'estado',label);
+
+        this.isFiltrado();  
+
+        this.sharingData.setDatas(this.datos);
+
+      }
+
+    },500);  
+
+  }
+
  
 
   public getPartes(inicial:boolean, filtro:string, valor:string): void{
    this.dataService.getPartes().then((response) => {var data = response.json();
-     console.log(data);
     //   this.service = this.dataService.getPartes() 
 
 
@@ -371,7 +421,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
              this.datos['filtro'] = 'cliente';
              break;
              case "estado":
-             this.datosHeredados = this.dataService.getPartesPorCliente(this.datosHeredados, data,filtro, valor)['total'];
+             this.datosHeredados = this.dataService.getPartesPorEstado(this.datosHeredados, data,filtro, valor)['total'];
              this.datos['filtro'] = 'estado';
              break;
          }
@@ -414,101 +464,20 @@ export class MyChartComponent implements OnInit, AfterViewInit {
       });
   }
   
-  ngAfterViewInit() {     
+  ngAfterViewInit() {    
 
-    this.canvas = document.getElementById('myChart');
-    this.ctx = this.canvas.getContext('2d');
-    this.myChart = new Chart(this.ctx, {
-      type: 'pie',
-      data: {
-          labels: this.labelsRecursos,
-          datasets: [{
-              data: this.partesPorRecuros,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'                 
-              ],
-              borderWidth: 1  
-          }]
-      },
-      options: {
-        legend:{
-          display: false,
-        },
-        responsive: false,
-        display:false,
-        title: {
-          position: 'bottom',
-            display: true,
-            text: 'Partes por recursos'
-        }
-      }
-    });
-    this.canvas = document.getElementById('myChart2');
-    this.ctx = this.canvas.getContext('2d');
+    this.createChart(this.myChart, "myChart", this.labelsRecursos, this.partesPorRecuros, "partes por recursos"); 
+    this.createChart(this.myChart2, "myChart2", this.labelsTipos, this.partesPorTipo, "partes por tipo");
+    this.createChart(this.myChart3, "myChart3", this.labelClientes, this.partesPorCliente, "partes por cliente");
+    console.log(document.getElementById('myChart4').style.display);
+    if (document.getElementById('myChart4').style.display == 'none'){
+      console.log("esta en none")}else{
+      console.log("esta en block");
+     /* document.getElementById("myChart").style.display = "none";
+      document.getElementById("myChart4").style.display = "block";  
+      this.createChart(this.myChart4, "myChart4", this.labelEstados, this.partesPorEstado, "partes por estado");*/
 
-    this.myChart2 = new Chart(this.ctx, {
-      type: 'pie',
-      data: {
-          labels: this.labelsTipos,
-          datasets: [{
-              label: '# of Votes',
-              data: this.partesPorTipo,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-        legend: {
-          display:false
-        },
-        responsive: false,
-        display:true,
-        title: {
-          position: 'bottom',
-            display: true,
-            text: 'Partes por tipos'
-        }
-      }
-    });
-
-
-
-    this.canvas = document.getElementById('myChart3');
-    this.ctx = this.canvas.getContext('2d');
-    this.myChart3= new Chart(this.ctx, {
-      type: 'pie',
-      data: {
-          labels: this.labelClientes,
-          datasets: [{
-              label: '# of Votes',
-              data: this.partesPorCliente,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-        legend:{
-          display:false
-        },
-        responsive: false,
-        display:true,
-        title: {
-          position: 'bottom',
-            display: true,
-            text: 'Partes por clientes'
-            }
-      }
-    });        
+    }
   }
 }
 
