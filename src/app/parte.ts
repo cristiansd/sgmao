@@ -15,6 +15,7 @@ constructor(
   public hextrasParte: number,
   public hnocturnasParte: number,
   public hfestivasParte: number,
-  public dietasParte: number
+  public dietasParte: number,
+  public estadoParte:string
   ){}
 }

@@ -13,7 +13,7 @@ dataSource$ = this._dataSource.asObservable();
 setDatas(data:any[]){
 	 this.data = data;
 	 this._dataSource.next(this.data);
-	 console.log('metodo setPrueba');   
+	 console.log('metodo setDatas');  
   }
 }
     

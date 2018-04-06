@@ -32,9 +32,10 @@ export class listComponent implements OnDestroy, OnInit{
 
       this.getDatas();
       this.sharingData.dataSource$.subscribe(res=>{
-        //console.log(res)
+        console.log("llamada a sharing datas");
         this.filtro = res[0];
         this.valor = res[1];
+        this.getDatas();
       });
 
     }
@@ -59,7 +60,6 @@ export class listComponent implements OnDestroy, OnInit{
 
     getFilterPartesRecurso(data:Parte[],recurso:string){
       var partes = [];
-
       var Recurso = data['recursos'].find(fd=>fd.nombreRecurso === recurso);
       var idRecurso = Recurso.idRecurso;
       partes.push(data['partes'].filter(ft=>ft.recursoParte === idRecurso));
@@ -99,6 +99,9 @@ export class listComponent implements OnDestroy, OnInit{
 
             this.partes[i]['tipoParte'] = this.dataService  
             .getConversTipos(data, data['partes'][i]['tipoParte']); 
+
+            this.partes[i]['estadoParte'] = this.dataService  
+            .getConversEstados(data, data['partes'][i]['estadoParte']); 
         }
        
       })
@@ -115,7 +118,6 @@ export class listComponent implements OnDestroy, OnInit{
                 console.log('el filtro es ' + this.filtro);
 
                 var partes = this.dataService.getFilterPartesRecurso(this.originalDatas, this.data,this.valor);
-                console.log(partes[0]);
                 for(let i in partes[0]){
 
                   partes[0][i]['recursoParte'] = this.dataService
@@ -128,7 +130,10 @@ export class listComponent implements OnDestroy, OnInit{
                   .getConversDescripcionTipos(this.originalDatas, partes[0][i]['tipoParte']);  
 
                   partes[0][i]['tipoParte'] = this.dataService
-                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);                 
+                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);        
+
+                  partes[0][i]['estadoParte'] = this.dataService
+                  .getConversEstados(this.originalDatas, partes[0][i]['estadoParte']);                 
                 }  
                 this.partes = partes[0]; 
                 this.data = this.partes; 
@@ -151,7 +156,10 @@ export class listComponent implements OnDestroy, OnInit{
                   .getConversClientes(this.originalDatas, partes[0][i]['clienteParte']);  
 
                   partes[0][i]['tipoParte'] = this.dataService
-                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);                 
+                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);  
+
+                  partes[0][i]['estadoParte'] = this.dataService
+                  .getConversEstados(this.originalDatas, partes[0][i]['estadoParte']);                      
                 }  
                 this.partes = partes[0];  
                 this.data = this.partes; 
@@ -173,7 +181,35 @@ export class listComponent implements OnDestroy, OnInit{
                   .getConversClientes(this.originalDatas, partes[0][i]['clienteParte']);  
 
                   partes[0][i]['tipoParte'] = this.dataService
-                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);                 
+                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);    
+
+                  partes[0][i]['estadoParte'] = this.dataService
+                  .getConversEstados(this.originalDatas, partes[0][i]['estadoParte']);                    
+                }  
+                this.partes = partes[0];  
+                this.data = this.partes; 
+                
+              break;
+
+              case "estado":
+
+              console.log('el filtro es ' + this.filtro);
+
+                var partes = this.dataService.getFilterPartesEstado(this.originalDatas, this.data, this.valor);
+
+                for(let i in partes[0]){
+
+                  partes[0][i]['recursoParte'] = this.dataService
+                  .getConversRecursos(this.originalDatas, partes[0][i]['recursoParte']);
+
+                  partes[0][i]['clienteParte'] = this.dataService
+                  .getConversClientes(this.originalDatas, partes[0][i]['clienteParte']);  
+
+                  partes[0][i]['tipoParte'] = this.dataService
+                  .getConversTipos(this.originalDatas, partes[0][i]['tipoParte']);    
+
+                  partes[0][i]['estadoParte'] = this.dataService
+                  .getConversEstados(this.originalDatas, partes[0][i]['estadoParte']);                    
                 }  
                 this.partes = partes[0];  
                 this.data = this.partes; 

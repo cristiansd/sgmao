@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { DaterangepickerConfig } from 'ng2-daterangepicker';
 
 @Component({
   selector: 'time-selector',

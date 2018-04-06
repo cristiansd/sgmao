@@ -6,6 +6,7 @@
  	/*padding-bottom: 50px;*/
  	display: block;
  	background-color: #252830;
+ 	cursor: pointer;
 }
 
 .chartContent{

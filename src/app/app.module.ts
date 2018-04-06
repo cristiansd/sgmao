@@ -30,6 +30,8 @@ import {SharingDataService } from './sharingData.service';
 
 import { HttpModule } from '@angular/http';
 
+import { NgDateRangePickerModule } from 'ng-daterangepicker';
+
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { HttpModule } from '@angular/http';
     JsonpModule,
     CommonModule,
     FormsModule,
-    OrderModule
+    OrderModule,
+    NgDateRangePickerModule
     
     
   ],

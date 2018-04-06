@@ -72,7 +72,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
 
   private clickPrevious(){
     console.log("metodo clickPrevious");    
-    document.getElementById("myChart").style.display = "block";
+    document.getElementById("myChart").style.display = "block";  
     document.getElementById("myChart4").style.display = "none";
   }
 
@@ -265,7 +265,6 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     setTimeout(() => { 
 
       if(this.evt != 'dblclick'){
-         console.log (this.myChart);
         var activePoints = this.myChart.getElementsAtEvent(evt);
 
           if(activePoints.length > 0){
@@ -289,8 +288,6 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           this.isFiltrado();
 
           this.sharingData.setDatas(this.datos); 
-
-          console.log('prueba de click en chart 1');
       }
 
     },500);
@@ -304,7 +301,6 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     setTimeout(() => { 
 
       if(this.evt != 'dblclick'){
-        console.log(this.myChart2);
         var activePoints = this.myChart2.getElementsAtEvent(evt);
 
         if(activePoints.length > 0){
