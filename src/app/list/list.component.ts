@@ -40,7 +40,7 @@ export class listComponent implements OnDestroy, OnInit{
 
     }
 
-    ngOnDestroy() {
+    ngOnDestroy() { 
       this.pruebaDatas.unsubscribe();
       console.log('destroy');
     }

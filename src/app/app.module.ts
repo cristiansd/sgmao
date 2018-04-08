@@ -30,7 +30,8 @@ import {SharingDataService } from './sharingData.service';
 
 import { HttpModule } from '@angular/http';
 
-import { NgDateRangePickerModule } from 'ng-daterangepicker';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -42,7 +43,7 @@ import { NgDateRangePickerModule } from 'ng-daterangepicker';
     MyChartComponent,
     TimeSelectorComponent,
     navBarComponent,
-    listComponent,
+    listComponent,    
     MyFilterPipe
 
   ],
@@ -54,8 +55,8 @@ import { NgDateRangePickerModule } from 'ng-daterangepicker';
     JsonpModule,
     CommonModule,
     FormsModule,
-    OrderModule,
-    NgDateRangePickerModule
+    NgbModule.forRoot(), 
+    OrderModule
     
     
   ],
