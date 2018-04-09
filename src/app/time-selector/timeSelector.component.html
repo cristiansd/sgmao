@@ -1,17 +1,63 @@
-	<div class="timeSelector">
-		<form class="form-inline">
-		  <div class="form-group">
-		    <div class="input-group">
-		      <input class="form-control" placeholder="yyyy-mm-dd"
-		             name="dp" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"  #d="ngbDatepicker">
-		      	
-		      <div class="input-group-append">
-		        <button class="btn btn-light" (click)="d.toggle()" type="button">
-		          <img src="assets/icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-		        </button>
-		      </div>
-		    </div>
-		  </div>
-		</form>
-	</div>
+	<!--<div class="timeSelector">
+		<div class="col-6 btn-group">
+	    <form class="form-inline">
+	      <div class="form-group">
+	        <div class="input-group">
+	          <input class="form-control" placeholder="yyyy-mm-dd"
+	                 name="d2" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+	          <div class="input-group-append">
+	            <button class="btn btn-secondary" (click)="d2.toggle()" type="button">
+	              <img src="assets/icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+	            </button>
+	          </div>
+	        </div>
+	      </div>
+	    </form>
+    </div>-->
+<button class="btn btn-secondary btn-group" (click)="clickCalendar()" type="button">
+  <img src="assets/icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;margin: 0 auto"/>
+</button>
+<ngb-datepicker id="calendar" #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
+</ngb-datepicker>
+<ng-template #t let-date="date" let-focused="focused">
+  <span class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+        [class.faded]="isHovered(date) || isInside(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+</ng-template>
 
+<!--<ngb-datepicker [displayMonths]="displayMonths" [navigation]="navigation" [showWeekNumbers]="showWeekNumbers">
+</ngb-datepicker>-->
+
+<!--<hr/>
+
+<form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [displayMonths]="displayMonths" [navigation]="navigation"
+             [showWeekNumbers]="showWeekNumbers" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+          <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<hr/>
+
+<div class="d-flex">
+  <select class="custom-select" [(ngModel)]="displayMonths">
+    <option [ngValue]="1">One month</option>
+    <option [ngValue]="2">Two months</option>
+    <option [ngValue]="3">Three months</option>
+  </select>
+
+  
+</div>-->

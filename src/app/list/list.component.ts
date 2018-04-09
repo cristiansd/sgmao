@@ -33,6 +33,7 @@ export class listComponent implements OnDestroy, OnInit{
       this.getDatas();
       this.sharingData.dataSource$.subscribe(res=>{
         console.log("llamada a sharing datas");
+        console.log(res[0]);
         this.filtro = res[0];
         this.valor = res[1];
         this.getDatas();
