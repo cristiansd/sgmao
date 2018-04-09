@@ -1,17 +1,3 @@
-/*import { Component} from '@angular/core';
-import {NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-
-
-
-@Component({
-  selector: 'time-selector',
-  templateUrl: './timeSelector.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./timeSelector.component.css']
-})
-export class TimeSelectorComponent {    
-	model;  
-}*/
-
 import {Component} from '@angular/core';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {SharingDataService } from '../sharingData.service';
@@ -59,13 +45,25 @@ export class TimeSelectorComponent {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
       this.toDate = date;
-      this.datos[0] = JSON.stringify(this.toDate['day']);
-      console.log(this.datos[0]);
+      this.datos['fromDate'] = (JSON.stringify(this.fromDate['year']) + "-" 
+        + JSON.stringify(this.fromDate['month']) + "-" 
+        + JSON.stringify(this.fromDate['day']));
+
+      this.datos['toDate'] = (JSON.stringify(this.toDate['year']) + "-"
+        + JSON.stringify(this.toDate['month']) + "-"
+        + JSON.stringify(this.toDate['day']));
+
+      console.log(this.datos['fromDate']);
       this.sharingData.setDatas(this.datos); 
+      document.getElementById("calendar").style.display = "none"; 
     } else {
       this.toDate = null;
       this.fromDate = date;
     }    
+  }
+
+  onDblClick(){
+    console.log('evento doble click');
   }
 
   isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);

@@ -24,6 +24,9 @@ export class listComponent implements OnDestroy, OnInit{
   originalDatas = [];
   filtro;
 
+  fromDate:string;
+  toDate:string;
+
   message:string;  
 
  
@@ -31,9 +34,13 @@ export class listComponent implements OnDestroy, OnInit{
     ngOnInit(): void {  
 
       this.getDatas();
-      this.sharingData.dataSource$.subscribe(res=>{
+      this.sharingData.dataSource$.subscribe(res=>{         
         console.log("llamada a sharing datas");
-        console.log(res[0]);
+        if(res['fromDate'] !== undefined || res['fromDate'] !== ''){
+          this.fromDate = res['fromDate'];
+          this.toDate = res['toDate'];        
+          this.dataService.setPartesFilterDate(this.fromDate, this.toDate);
+        }
         this.filtro = res[0];
         this.valor = res[1];
         this.getDatas();

@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 import {DataService } from '../data.service';
 import {SharingDataService } from '../sharingData.service';
 import {Parte} from '../parte';
+import { ISubscription } from "rxjs/Subscription";
 
 
 @Component({
@@ -45,16 +46,32 @@ export class MyChartComponent implements OnInit, AfterViewInit {
   private chartHeight;
   private descripcionTipo = [];
   private varChart = [];
-
+  fromDate:string;
+  toDate:string;
+  private subscription: ISubscription;
   message:string;
 
   constructor( private dataService: DataService, private sharingData: SharingDataService) {
   } 
 
   ngOnInit(): void {
-    console.log('metodo ngOnInit chartPie.component.ts');
-    this.getPartes(true, '','');    
+    console.log('metodo ngOnInit chartPie.component.ts'); 
+    this.getPartes(true, '','');  
+    this.onSubcription();      
   } 
+
+  private onSubcription(){
+    this.subscription = this.sharingData.dataSource$.subscribe(res=>{         
+        console.log("llamada a sharing datas");
+        if(res['fromDate'] !== undefined || res['fromDate'] !== ''){
+          this.fromDate = res['fromDate'];
+          this.toDate = res['toDate'];        
+          this.dataService.setPartesFilterDate(this.fromDate, this.toDate);
+          
+          this.getPartes(true, '',''); 
+        }        
+      }); 
+  }
 
   private clickNext(){
      console.log("metodo clickNext");      
@@ -122,7 +139,9 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     console.log('metodo destroyCharts');
     this.myChart.destroy();
     this.myChart2.destroy();
-    this.myChart3.destroy();    
+    this.myChart3.destroy();   
+    /*this.subscription.unsubscribe();
+    console.log(this.subscription.closed);*/
   }
 
   private isFiltrado():boolean{
@@ -412,6 +431,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
  
 
   public getPartes(inicial:boolean, filtro:string, valor:string): void{
+
+    console.log("metodo getPartes()");
+    /*if(this.subscription.closed)
+      this.onSubcription();*/
    this.dataService.getPartes().then((response) => {var data = response.json();
     //   this.service = this.dataService.getPartes() 
 
@@ -437,6 +460,10 @@ export class MyChartComponent implements OnInit, AfterViewInit {
              this.datos['filtro'] = 'estado';
              break;
          }
+          this.partesPorRecuros = [];
+          this.partesPorEstado = [];
+          this.partesPorTipo = [];
+          this.partesPorCliente = [];
 
 
           //DESCARGAMOS LOS RECURSOS
@@ -458,7 +485,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
           this.partesPorEstado = this.dataService.getPartesPorEstado(this.datosHeredados, data,filtro, valor)['partes'];
           this.labelEstados = this.dataService.getPartesPorEstado(this.datosHeredados, data, filtro, valor)['labels']; 
 
-          this.ngAfterViewInit();  
+          this.ngAfterViewInit();
 
           if(this.datosHeredados.length == 0){
             this.datosHeredados.push(data['partes']);   
@@ -476,7 +503,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
       });
   }
   
-  ngAfterViewInit() {    
+  ngAfterViewInit(): void {   
     this.createCanvas("myChart");
     this.myChart = this.createChart(this.labelsRecursos, this.partesPorRecuros, "partes por recursos");
     this.createCanvas("myChart2"); 
@@ -485,7 +512,7 @@ export class MyChartComponent implements OnInit, AfterViewInit {
     this.myChart3 = this.createChart(this.labelClientes, this.partesPorCliente, "partes por cliente");
     if(this.myChart4 !== undefined){
       this.clickNext();
-    }
+    }     
   }
 }
 

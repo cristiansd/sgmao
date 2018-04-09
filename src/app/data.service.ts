@@ -29,33 +29,16 @@ export class DataService {
 
   	private Url = 'http://savia.byethost10.com/SaviaAdmin/consultaTotalPartes.php?callback=JSONP_CALLBACK';    
 
-  	/*private handleError(error: any): Promise<any> {
-  		console.error('An error occurred', error); // for demo purposes only
-  		return Promise.reject(error.message || error);
-	}*/
+    setPartesFilterDate(fromDate:string, toDate:string){
+      if(fromDate !== undefined)
+      this.Url += "&fromDate=" + fromDate + "&toDate=" + toDate;
+    }
 
-  	//getPartes():Observable<Parte[]>{
     getPartes(){
       var data;
       let params = new URLSearchParams();
       console.log('metodo getPartes');
-    return this.jsonp.get(this.Url).toPromise()
-                /*then((response) => data = response.json());
-
-                return data;
-        /*.map((response: any) =>
-          response.json()
-        ).toPromise();
-        //console.log(promise);
-    //return promise;  
-
-  		/*let params = new URLSearchParams();
-  		
-  		params.set('callback', 'JSONP_CALLBACK');
-
-      	return this.jsonp
-        .get(this.Url)        
-        .map(response => this.Result = response.json());*/
+      return this.jsonp.get(this.Url).toPromise()                
   	}
 
     getFilterPartesRecurso(originalDatas:Parte[], data:Parte[],recurso:string){

@@ -19,7 +19,7 @@
 </button>
 <ngb-datepicker id="calendar" #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t">
 </ngb-datepicker>
-<ng-template #t let-date="date" let-focused="focused">
+<ng-template  #t let-date="date" let-focused="focused">
   <span class="custom-day"
         [class.focused]="focused"
         [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
