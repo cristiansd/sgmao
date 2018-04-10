@@ -34,4 +34,12 @@ export class BotonPanelComponent {
     document.getElementById('backgroundGrey').style.minHeight = '';
     document.getElementById('backgroundGrey').style.width = '100%';
   }
+
+  clickToolButton(){
+    if(document.getElementById("navPanel2").style.display == "none"){
+      document.getElementById("navPanel2").style.display = "block";
+    }else{
+      document.getElementById("navPanel2").style.display = "none"
+    }
+  }
 }

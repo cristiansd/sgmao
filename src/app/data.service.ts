@@ -34,6 +34,10 @@ export class DataService {
       this.Url += "&fromDate=" + fromDate + "&toDate=" + toDate;
     }
 
+    getRecursos(){
+      return this.jsonp.get(this.Url + "&recursos").toPromise()  
+    }
+
     getPartes(){
       var data;
       let params = new URLSearchParams();

@@ -14,6 +14,7 @@ setDatas(data:any[]){
 	 this.data = data;
 	 this._dataSource.next(this.data);
 	 console.log('metodo setDatas');  
+	 console.log(this.data);
   }
 }
     

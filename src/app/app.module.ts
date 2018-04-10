@@ -13,6 +13,7 @@ import { MyChartComponent } from './chartPie/chartPie.component';
 import { TimeSelectorComponent } from './time-selector/timeSelector.component';
 import { navBarComponent } from './navBar/navBar.component';
 import { listComponent } from './list/list.component';
+import {RecursosComponent} from './recursos/recursos.component';
 
 import {DataService } from './data.service';
 
@@ -31,6 +32,8 @@ import {SharingDataService } from './sharingData.service';
 import { HttpModule } from '@angular/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './/app-routing.module';
+import { PrincipalComponent } from './principal/principal.component';
 
 
 
@@ -38,13 +41,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
+    RecursosComponent,
     NavPanelComponent,
-    BotonPanelComponent,
+    BotonPanelComponent,  
     MyChartComponent,
     TimeSelectorComponent,
     navBarComponent,
     listComponent,    
-    MyFilterPipe
+    MyFilterPipe, 
+    PrincipalComponent
 
   ],
   imports: [
@@ -56,7 +61,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule,
     NgbModule.forRoot(), 
-    OrderModule
+    OrderModule, AppRoutingModule
     
     
   ],

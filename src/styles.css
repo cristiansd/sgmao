@@ -51,6 +51,17 @@ body{
 	background-color:#30343E;
 }
 
+.navPanelContent2{	
+	display: none;
+	background-color:#585858;
+	position: absolute;
+	margin-left: 70px;
+	top:0px;
+	float:left;
+	z-index: 1000;
+	width: 70px;
+}
+
 
 .thead-light{
 	background-color: silver;

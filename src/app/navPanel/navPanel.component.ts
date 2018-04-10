@@ -23,7 +23,6 @@ export class NavPanelComponent implements OnInit {
   {id:4, title:'Note 4', description: 'Description for Note 4'}
   ]
 
-
 	ngOnInit(): void {
 		this.getModules();
 	}

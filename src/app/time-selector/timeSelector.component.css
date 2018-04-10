@@ -7,6 +7,7 @@
 	float:right;
 	margin-right: 50px;
 	width: 150px;
+	cursor: pointer;
 }
 #calendar{
 	display:none;
@@ -16,4 +17,43 @@
 	float: right;
 	margin-top: 50px;
 	margin-right: -150px;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-20 { font-size: 20px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    z-index: 0;
+    color:#fff;
+    cursor: pointer;
+    /*border-bottom: 1px dotted black;*/
+    /*padding: 10px;*/
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #fff;
+    color: #555;
+    text-align: center;
+   /* font-weight:bold;*/
+    border-radius: 6px;
+    padding: 5px 0;
+    opacity: 1;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index:1;
+    /*top: -5px;
+    left: 105%;*/
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;    
 }

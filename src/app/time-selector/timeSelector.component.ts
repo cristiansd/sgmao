@@ -16,7 +16,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 @Component({
   selector: 'time-selector',
   templateUrl: './timeSelector.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./timeSelector.component.css']})
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./timeSelector.component.css', '../../../node_modules/material-design-icons/iconfont/material-icons.css']})
 
 export class TimeSelectorComponent {
 
