@@ -1,0 +1,20 @@
+<div class="listContent">
+  <table id='table' class="table table-bordered table-dark table-hover color-font tabla" style = 'padding-top:10px; overflow:scroll;'>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">
+        <a href="#" (click)="orderBy('idParte')" ><font color="grey">Nombre</font></a>
+        </th>
+        <th scope="col">
+          <a href="#" (click)="orderBy('otParte')"><font color="grey">Apellidos</font></a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let recurso of recursos'>
+        <td><div class="tooltip">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
+        <td><div class="tooltip"><div>{{recurso.apellidosRecurso}}</div><span class="tooltiptext"></span></div></td>
+      </tr>    
+    </tbody>
+  </table>
+</div>
