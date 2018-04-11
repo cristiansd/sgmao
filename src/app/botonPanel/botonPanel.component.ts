@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   				'../../../node_modules/material-design-icons/iconfont/material-icons.css']
 })
 export class BotonPanelComponent {
-  title = 'app';
+  title = 'app'; 
 
   clickListButton(evt){
   	var divToChange = document.getElementsByClassName('myChart');

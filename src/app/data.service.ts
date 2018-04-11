@@ -34,9 +34,9 @@ export class DataService {
       this.Url += "&fromDate=" + fromDate + "&toDate=" + toDate;
     }
 
-    getRecursos(){
+    getDatas(data:string){
       var url = 'http://savia.byethost10.com/SaviaAdmin/consultaVarios.php?callback=JSONP_CALLBACK'; 
-      return this.jsonp.get(url + "&getter=recursos").toPromise()  
+      return this.jsonp.get(url + "&getter=" + data).toPromise()  
     }
 
     getPartes(){

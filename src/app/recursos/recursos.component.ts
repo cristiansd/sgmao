@@ -12,9 +12,9 @@ export class RecursosComponent implements OnInit{
 
 	ngOnInit(): void {
 		console.log('onInit recursos.component');
-		this.dataService.getRecursos().then((response) => {
+		this.dataService.getDatas('recursos').then((response) => {
 			var data = response.json();
-			this.recursos = data;
+			this.recursos = data['recursos'];
 			console.log(this.recursos);
 		});
 	}

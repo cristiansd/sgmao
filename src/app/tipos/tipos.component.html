@@ -1,0 +1,26 @@
+<div class="listContent">
+  <table id='table' class="table table-bordered table-dark table-hover color-font tabla" style = 'padding-top:10px; overflow:scroll;'>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">
+        	<a href="#" (click)="orderBy('idParte')" ><font color="grey">Nombre</font></a>
+        </th>  
+        <th scope="col">
+        	<a href="#" (click)="orderBy('idParte')" ><font color="grey">Descripción</font></a>
+        </th>         
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let tipo of tipos'>
+        <td>
+        	<div class="tooltip">{{tipo.nombreTipo}}<span class="tooltiptext">Doble click para abrir</span>
+        	</div>
+        </td>
+        <td>
+        	<div class="tooltip">{{tipo.descripcionTipo}}<span class="tooltiptext">Doble click para abrir</span>
+        	</div>
+        </td>
+    </tr>    
+    </tbody>
+  </table>
+</div>

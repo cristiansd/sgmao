@@ -31,9 +31,18 @@ import {SharingDataService } from './sharingData.service';
 
 import { HttpModule } from '@angular/http';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {MatDialogModule} from '@angular/material/dialog';
+
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './/app-routing.module';
 import { PrincipalComponent } from './principal/principal.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { TiposComponent } from './tipos/tipos.component';
 
 
 
@@ -49,8 +58,9 @@ import { PrincipalComponent } from './principal/principal.component';
     navBarComponent,
     listComponent,    
     MyFilterPipe, 
-    PrincipalComponent
-
+    PrincipalComponent, 
+    ClientesComponent, 
+    TiposComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +71,12 @@ import { PrincipalComponent } from './principal/principal.component';
     CommonModule,
     FormsModule,
     NgbModule.forRoot(), 
-    OrderModule, AppRoutingModule
-    
+    OrderModule, 
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatTooltipModule
+
     
   ],
   providers:[DataService, SharingDataService],
