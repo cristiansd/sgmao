@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 
 @Component({
   selector: 'list-ordenes',
-  templateUrl: './list.component.html',
+  templateUrl: './list.component.html',  
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./list.component.css'],
   providers:[DataService]
 })
@@ -18,7 +18,7 @@ export class listComponent implements OnDestroy, OnInit{
   @Input('texto') order:string;
   valor;
   partes = [];
-  pruebaDatas: ISubscription;
+  pruebaDatas: ISubscription;  
   subscripcion:Subscription;
   data = [];
   originalDatas = [];

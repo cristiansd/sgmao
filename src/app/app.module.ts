@@ -37,12 +37,19 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+import {MatIconModule} from '@angular/material/icon';
+
+import {MatInputModule} from '@angular/material/input';
+
+
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './/app-routing.module';  
 import { PrincipalComponent } from './principal/principal.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { TiposComponent } from './tipos/tipos.component';
+import { IconComponent } from './icon/icon.component';
+
 
 
 
@@ -60,7 +67,8 @@ import { TiposComponent } from './tipos/tipos.component';
     MyFilterPipe, 
     PrincipalComponent, 
     ClientesComponent, 
-    TiposComponent
+    TiposComponent, 
+    IconComponent
   ],
   imports: [
     BrowserModule,
@@ -75,9 +83,9 @@ import { TiposComponent } from './tipos/tipos.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatTooltipModule
-
-    
+    MatTooltipModule,
+    MatIconModule,
+    MatInputModule   
   ],
   providers:[DataService, SharingDataService],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import {DataService } from '../data.service';
+import {IconComponent} from  '../icon/icon.component';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 

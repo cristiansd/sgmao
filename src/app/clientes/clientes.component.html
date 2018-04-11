@@ -20,16 +20,22 @@
 
  <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Modificar cliente</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>One fine body&hellip;</p>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Introduce el cliente">
+    </mat-form-field>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+    <span matTooltip="Modificar cliente">
+      <button type="button" class="btn btn-block btn-light" (click)="c('Close click')" style="cursor: pointer;">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>
   </div>
 </ng-template>
 
