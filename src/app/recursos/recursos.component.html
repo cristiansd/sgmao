@@ -12,9 +12,81 @@
     </thead>
     <tbody>
       <tr *ngFor='let recurso of recursos'>
-        <td><div class="tooltip">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
+        <td><div class="tooltip" (dblclick)="openVerticallyCentered(content); setDatasRecurso(recurso.nombreRecurso, recurso.apellidosRecurso, recurso.idRecurso)">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
         <td><div class="tooltip"><div>{{recurso.apellidosRecurso}}</div><span class="tooltiptext"></span></div></td>
       </tr>    
     </tbody>
   </table>
+
+  <span matTooltip="Añadir nuevo recurso">
+    <button class="btn btn-secondary btn-block material-icons" style="cursor: pointer;" (click)="openVerticallyCentered(content2)">note_add</button>  
+  </span>
+
 </div>
+
+<ng-template id="modal" #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modificar recurso</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="nombreRecurso" matInput placeholder="Nombre recurso">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="apellidosRecurso" matInput placeholder="Apellidos recurso">
+    </mat-form-field>
+  </div>
+  <div class="modal-footer">
+    <span matTooltip="Modificar recurso">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickUploadButton();">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
+</ng-template>
+
+<ng-template id="modal" #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Añadir recurso</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="nombreRecurso" matInput placeholder="Nombre recurso">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="apellidosRecurso" matInput placeholder="Apellidos recurso">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="email" [formControl]="emailFormControl"
+             [errorStateMatcher]="matcher">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+  </mat-form-field>
+  </div>
+  <div class="modal-footer">
+    <span matTooltip="Guardar recurso">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickSaveButton();">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
+</ng-template>

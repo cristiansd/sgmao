@@ -1,21 +1,107 @@
 import { Component, OnInit} from '@angular/core';
 import {DataService } from '../data.service';
+import {IconComponent} from  '../icon/icon.component';
+
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 
 @Component({
   selector: 'recursos',
   templateUrl: './recursos.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./recursos.component.css']
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./recursos.component.css',
+  '../../../node_modules/material-design-icons/iconfont/material-icons.css'],
+  providers: [
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+  ]
 })
 export class RecursosComponent implements OnInit{
-	private recursos = [];
-	constructor(private dataService: DataService) {}
 
+	private recursos = [];
+	private nombreRecurso;
+	private apellidosRecurso;
+	private id;
+	modalRef;
+	private email;
+
+	constructor(private dataService: DataService, private modalService: NgbModal) {}
+
+	emailFormControl = new FormControl('', [
+	    Validators.required,
+	    Validators.email,
+	]);
+
+  	matcher = new MyErrorStateMatcher();  
 	ngOnInit(): void {
 		console.log('onInit recursos.component');
 		this.dataService.getDatas('recursos').then((response) => {
 			var data = response.json();
 			this.recursos = data['recursos'];
-			console.log(this.recursos);
+			console.log(this.recursos);  
 		});
 	}
-}  
+
+	openVerticallyCentered(content) {
+     this.modalRef = this.modalService.open(content,{ centered: true });
+  }
+
+  private setDatasRecurso(nombre, apellidos, idContent){
+  	this.nombreRecurso = nombre;
+  	this.apellidosRecurso = apellidos;
+  	this.id = idContent;
+  }
+
+  	private onClickUploadButton(){
+ 	document.getElementById("spinner").style.display = "block"; 	
+ 	this.dataService.setRecurso("modificarRecurso", this.nombreRecurso, this.apellidosRecurso, this.id).then((response) => {
+ 		var data = response.json();
+ 		if(data.status == 'ok'){
+ 			this.modalRef.close();
+ 			this.ngOnInit();
+ 		} else {
+ 			console.log("ha habido un error");
+ 			document.getElementById("alert").style.display = "block";
+ 		}
+ 		
+ 	}).catch(error => {
+ 		console.log("error " + error);
+ 		document.getElementById("spinner").style.display = "none"; 	
+ 		document.getElementById("alert").style.display = "block";
+ 	});
+
+ 	console.log(this.nombreRecurso);
+ }
+
+ private onClickSaveButton(){
+ 	document.getElementById("spinner").style.display = "block"; 	
+ 	this.dataService.setRecurso("NuevoRecurso", this.nombreRecurso, this.apellidosRecurso, this.id).then((response) => {
+ 		var data = response.json();
+ 		if(data.status == 'ok'){
+ 			this.modalRef.close();
+ 			this.ngOnInit();
+ 		} else {
+ 			console.log("ha habido un error");
+ 			document.getElementById("alert").style.display = "block";
+ 		}
+ 		
+ 	}).catch(error => {
+ 		console.log("error " + error);
+ 		document.getElementById("spinner").style.display = "none"; 	
+ 		document.getElementById("alert").style.display = "block";
+ 	});
+
+ 	console.log(this.nombreRecurso);
+ }
+
+}
+
+
