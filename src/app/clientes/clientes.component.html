@@ -3,22 +3,26 @@
     <thead class="thead-light">
       <tr>
         <th scope="col">
-        <a href="#" (click)="orderBy('idParte')" ><font color="grey">Nombre</font></a>
+        <a href="#" (click)="orderBy('idParte')" ><font color="grey">Clientes</font></a>
         </th>        
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let cliente of clientes'>
+      <tr *ngFor='let cliente of clientes'>  
         <td> 
-            <div class="tooltip"  (dblclick)="openVerticallyCentered(content)">
+            <div class="tooltip"  (dblclick)="openVerticallyCentered(content);setNameCliente(cliente.nombreCliente, cliente.idCliente)">
               <span matTooltip="Doble click para configurar">{{cliente.nombreCliente}}</span>
             </div>
         </td>
     </tr>    
     </tbody>
-  </table>
+  </table> 
+  <span matTooltip="Añadir nuevo cliente">
+    <button class="btn btn-secondary btn-block material-icons" style="cursor: pointer;" (click)="openVerticallyCentered(content2)">note_add</button>  
+  </span>
+</div>
 
- <ng-template #content let-c="close" let-d="dismiss">
+ <ng-template id="modal" #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Modificar cliente</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -27,16 +31,46 @@
   </div>
   <div class="modal-body">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Introduce el cliente">
+      <input [(ngModel)]="cliente" matInput placeholder="Introduce el cliente">
     </mat-form-field>
   </div>
   <div class="modal-footer">
     <span matTooltip="Modificar cliente">
-      <button type="button" class="btn btn-block btn-light" (click)="c('Close click')" style="cursor: pointer;">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickUploadButton();">
         <app-icon svgIcon="rubish"></app-icon>
       </button>
-    </span>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
   </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
 </ng-template>
+
+<ng-template id="modal" #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Añadir cliente</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="cliente" matInput placeholder="Introduce el cliente">
+    </mat-form-field>
+  </div>
+  <div class="modal-footer">
+    <span matTooltip="Guardar cliente">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickSaveButton();">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
+</ng-template>
+
 
 
