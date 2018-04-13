@@ -9,10 +9,10 @@
           <a href="#" (click)="orderBy('otParte')"><font color="grey">Apellidos</font></a>
         </th>
       </tr>
-    </thead>
+    </thead> 
     <tbody>
       <tr *ngFor='let recurso of recursos'>
-        <td><div class="tooltip" (dblclick)="openVerticallyCentered(content); setDatasRecurso(recurso.nombreRecurso, recurso.apellidosRecurso, recurso.idRecurso)">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
+        <td><div class="tooltip" (dblclick)="openVerticallyCentered(content); setDatasRecurso(recurso.nombreRecurso, recurso.apellidosRecurso, recurso.idRecurso, recurso.emailRecurso, recurso.claveRecurso)">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
         <td><div class="tooltip"><div>{{recurso.apellidosRecurso}}</div><span class="tooltiptext"></span></div></td>
       </tr>    
     </tbody>
@@ -38,15 +38,35 @@
     <mat-form-field class="example-full-width">
       <input [(ngModel)]="apellidosRecurso" matInput placeholder="Apellidos recurso">
     </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="email" matInput placeholder="email" [formControl]="emailFormControl"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Por favor introduce una dirección de correo válida
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email es <strong>obligatorio</strong>
+      </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+      <input [(ngModel)]="clave" matInput placeholder="contraseña" [formControl]="passwordFormControl"
+             [errorStateMatcher]="matcher">      
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Contraseña es <strong>obligatoria</strong>
+      </mat-error>
+  </mat-form-field>
   </div>
   <div class="modal-footer">
     <span matTooltip="Modificar recurso">
-      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickUploadButton();">
+      <button  id="upLoadButton" type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickUploadButton();">
         <app-icon svgIcon="rubish"></app-icon>
       </button>
     </span>  
     <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
     <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  <ngb-alert id = "errorDatas" (close)="closeAlert()" class = "alert" [dismissible]="true" type="danger">
+    <strong>Atención!</strong> Todos los campos deben ser rellenados correctamente.
   </ngb-alert>  
   </div>
   <mat-spinner id="spinner" class="spinner"></mat-spinner>  

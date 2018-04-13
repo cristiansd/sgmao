@@ -12,7 +12,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ClientesComponent implements OnInit {
 
-private clientes = [];
+private clientes = []; 
 private cliente;
 private id;
 modalRef;

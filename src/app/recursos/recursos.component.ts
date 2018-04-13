@@ -13,16 +13,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-
+ 
 
 @Component({
   selector: 'recursos',
   templateUrl: './recursos.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./recursos.component.css',
-  '../../../node_modules/material-design-icons/iconfont/material-icons.css'],
-  providers: [
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
-  ]
+  '../../../node_modules/material-design-icons/iconfont/material-icons.css']
 })
 export class RecursosComponent implements OnInit{
 
@@ -32,6 +29,7 @@ export class RecursosComponent implements OnInit{
 	private id;
 	modalRef;
 	private email;
+	private clave;
 
 	constructor(private dataService: DataService, private modalService: NgbModal) {}
 
@@ -40,7 +38,12 @@ export class RecursosComponent implements OnInit{
 	    Validators.email,
 	]);
 
+	passwordFormControl = new FormControl('', [
+	    Validators.required
+	]);
+
   	matcher = new MyErrorStateMatcher();  
+
 	ngOnInit(): void {
 		console.log('onInit recursos.component');
 		this.dataService.getDatas('recursos').then((response) => {
@@ -54,36 +57,48 @@ export class RecursosComponent implements OnInit{
      this.modalRef = this.modalService.open(content,{ centered: true });
   }
 
-  private setDatasRecurso(nombre, apellidos, idContent){
+  private setDatasRecurso(nombre, apellidos, idContent, email, clave){
   	this.nombreRecurso = nombre;
   	this.apellidosRecurso = apellidos;
   	this.id = idContent;
+  	this.email = email;
+  	this.clave = clave;
   }
 
-  	private onClickUploadButton(){
- 	document.getElementById("spinner").style.display = "block"; 	
- 	this.dataService.setRecurso("modificarRecurso", this.nombreRecurso, this.apellidosRecurso, this.id).then((response) => {
- 		var data = response.json();
- 		if(data.status == 'ok'){
- 			this.modalRef.close();
- 			this.ngOnInit();
- 		} else {
- 			console.log("ha habido un error");
- 			document.getElementById("alert").style.display = "block";
- 		}
- 		
- 	}).catch(error => {
- 		console.log("error " + error);
- 		document.getElementById("spinner").style.display = "none"; 	
- 		document.getElementById("alert").style.display = "block";
- 	});
+ 	private closeAlert(){
+  		document.getElementById('errorDatas').style.display = "none";
+	}
 
- 	console.log(this.nombreRecurso);
- }
+  	private onClickUploadButton(){	 	
+	 	console.log(this.email);
+	 	if (this.email === undefined || this.email ===''){
+	 		document.getElementById('errorDatas').style.display = "block";
+	 	} else {
+	 		document.getElementById("spinner").style.display = "block"; 	
+		 	this.dataService.setRecurso("modificarRecurso", this.nombreRecurso, this.apellidosRecurso, this.email, this.id).then((response) => {
+		 		var data = response.json();
+		 		if(data.status == 'ok'){
+		 			this.modalRef.close();
+		 			this.ngOnInit();
+		 		} else {
+		 			console.log("ha habido un error");
+		 			document.getElementById("alert").style.display = "block";
+		 		}
+
+		 		
+		 	}).catch(error => {
+		 		console.log("error " + error);
+		 		document.getElementById("spinner").style.display = "none"; 	
+		 		document.getElementById("alert").style.display = "block";
+		 	});
+
+		 	console.log(this.nombreRecurso);
+ 		}
+	}
 
  private onClickSaveButton(){
  	document.getElementById("spinner").style.display = "block"; 	
- 	this.dataService.setRecurso("NuevoRecurso", this.nombreRecurso, this.apellidosRecurso, this.id).then((response) => {
+ 	this.dataService.setRecurso("NuevoRecurso", this.nombreRecurso, this.apellidosRecurso, this.email, this.id).then((response) => {
  		var data = response.json();
  		if(data.status == 'ok'){
  			this.modalRef.close();

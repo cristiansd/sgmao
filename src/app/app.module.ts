@@ -43,6 +43,8 @@ import {MatInputModule} from '@angular/material/input';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
+import {ReactiveFormsModule} from '@angular/forms';
+
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './/app-routing.module';  
@@ -87,7 +89,8 @@ import { IconComponent } from './icon/icon.component';
     MatTooltipModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule  
+    MatProgressSpinnerModule ,
+    ReactiveFormsModule 
   ],
   providers:[DataService, SharingDataService],
   bootstrap: [AppComponent]
