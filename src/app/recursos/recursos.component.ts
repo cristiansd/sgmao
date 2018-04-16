@@ -62,7 +62,7 @@ export class RecursosComponent implements OnInit{
   	this.apellidosRecurso = apellidos;
   	this.id = idContent;
   	this.email = email;
-  	this.clave = clave;
+  	this.clave = clave;  
   }
 
  	private closeAlert(){

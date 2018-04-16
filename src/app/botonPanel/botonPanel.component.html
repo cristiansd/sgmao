@@ -9,10 +9,37 @@
 <div class="navPanelContent2" id="navPanel2">
 	<button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip"><div class="material-icons md-light">note_add</div><span class="tooltiptext">Crear parte</span></div></button>
 
-	<button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip"><div class="material-icons md-light">create_new_folder</div><span class="tooltiptext">Crear Orden</span></div></button>
+	<a routerLink="/ordenes">
+		<button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip">
+			<div class="material-icons md-light">create_new_folder</div>
+				<span class="tooltiptext">Ordenes</span>
+			</div>
+		</button>
+	</a>
 
-	<a routerLink="/tipos"><button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip"><div class="material-icons md-light">storage</div><span class="tooltiptext">Tipos</span></div></button></a>			
-	<a routerLink="/recursos"><button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip"><div class="material-icons md-light">assignment_ind</div><span class="tooltiptext">Recursos</span></div></button></a>
+	<a routerLink="/tipos">
+		<button class='boton-panel2 ' (click)="clickHomeButton($event)">
+			<div class="tooltip">
+				<div class="material-icons md-light">storage</div>
+				<span class="tooltiptext">Tipos</span>
+			</div>
+		</button>
+	</a>			
+	<a routerLink="/recursos">
+		<button class='boton-panel2 ' (click)="clickHomeButton($event)">
+			<div class="tooltip">
+				<div class="material-icons md-light">assignment_ind</div>
+				<span class="tooltiptext">Recursos</span>
+			</div>
+		</button>
+	</a>
 
-	<a routerLink="/clientes"><button class='boton-panel2 ' (click)="clickHomeButton($event)"><div class="tooltip"><div class="material-icons md-light">supervisor_account</div><span class="tooltiptext">Clientes</span></div></button></a>
+	<a routerLink="/clientes">
+		<button class='boton-panel2 ' (click)="clickHomeButton($event)">
+			<div class="tooltip">
+				<div class="material-icons md-light">supervisor_account</div>
+				<span class="tooltiptext">Clientes</span>
+			</div>
+		</button>
+	</a>
 </div>      

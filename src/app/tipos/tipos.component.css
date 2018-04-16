@@ -1,18 +1,18 @@
 .tabla {
-	height: 50px !important;
-	overflow: scroll;
+    height: 50px !important;
+    overflow: scroll;
 }
 
 .listContent{
-	height: 100%;
-	width: 80%;
-	margin:0 auto;
+    height: 100%;
+    width: 80%;
+    margin:0 auto;
     margin-top: 20px;
 }
 
 .alert-info{
-	background-color: #ffffff;
-	display: none;
+    background-color: #ffffff;
+    display: none;
 }
 
 .tooltip {
@@ -49,3 +49,36 @@
     visibility: visible;
     opacity: 1;    
 }
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.spinner{
+    position: absolute;
+    z-index: 1000;
+    margin-top: 15%;
+    margin-left: 40%;
+    display: none;
+
+}
+
+.alert{
+    bottom: all;
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    
+}
+
+.alert-custom {
+      color: #99004d;
+      background-color: #f169b4;
+      border-color: #800040;
+    }

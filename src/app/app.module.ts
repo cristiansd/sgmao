@@ -52,6 +52,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { TiposComponent } from './tipos/tipos.component';
 import { IconComponent } from './icon/icon.component';
+import { OrdenesComponent } from './ordenes/ordenes.component';
 
 
 
@@ -71,7 +72,7 @@ import { IconComponent } from './icon/icon.component';
     PrincipalComponent, 
     ClientesComponent, 
     TiposComponent, 
-    IconComponent
+    IconComponent, OrdenesComponent
   ],
   imports: [
     BrowserModule,

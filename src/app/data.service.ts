@@ -39,6 +39,19 @@ export class DataService {
       return this.jsonp.get(url + "&setter=" + element + "&data=" + data + "&id=" + id).toPromise() 
     }
 
+    setTipo(element:string, nombre:string, descripcion:string, id:string){
+      console.log('metodo setTipo');
+      var url = 'http://savia.byethost10.com/SaviaAdmin/consultaVarios.php?callback=JSONP_CALLBACK'; 
+      if(element === 'nuevoTipo'){
+        console.log('nuevoTipo');
+        return this.jsonp.get(url + "&setter=" + element + "&nombre=" + nombre + "&descripcion=" + descripcion)
+        .toPromise() 
+      } else {
+        return this.jsonp.get(url + "&setter=" + element + "&nombre=" + nombre + "&descripcion=" + descripcion + 
+        "&id=" + id).toPromise() 
+      }      
+    }
+
     setRecurso(element:string, nombre:string, apellidos:string, email:string, id:string){
       var url = 'http://savia.byethost10.com/SaviaAdmin/consultaVarios.php?callback=JSONP_CALLBACK'; 
       return this.jsonp.get(url + "&setter=" + element + "&nombre=" + nombre + "&apellidos=" + apellidos + 

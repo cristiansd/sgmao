@@ -13,8 +13,9 @@
     <tbody>
       <tr *ngFor='let tipo of tipos'>
         <td>
-        	<div class="tooltip">{{tipo.nombreTipo}}<span class="tooltiptext">Doble click para abrir</span>
-        	</div>
+          <div class="tooltip"(dblclick)="openVerticallyCentered(content);setTipo(tipo.nombreTipo, tipo.descripcionTipo, tipo.idTipo)">
+              <span matTooltip="Doble click para configurar">{{tipo.nombreTipo}}</span>
+          </div>        	
         </td>
         <td>
         	<div class="tooltip">{{tipo.descripcionTipo}}<span class="tooltiptext">Doble click para abrir</span>
@@ -23,4 +24,63 @@
     </tr>    
     </tbody>
   </table>
+  <span matTooltip="Añadir nuevo tipo">
+    <button class="btn btn-secondary btn-block material-icons" style="cursor: pointer;" (click)="openVerticallyCentered(content2)">note_add</button>  
+  </span>
 </div>
+
+<ng-template id="modal" #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Modificar tipo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="nombreTipo" matInput placeholder="Introduce el tipo">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="descripcionTipo" matInput placeholder="Introduce la descripción">
+    </mat-form-field>
+  </div>
+  <div class="modal-footer">
+    <span matTooltip="Modificar tipo">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickUploadButton();">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
+</ng-template>
+
+<ng-template id="modal" #content2 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Añadir tipo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="nombreTipo" matInput placeholder="Introduce el tipo">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="descripcionTipo" matInput placeholder="Introduce la descripción">
+    </mat-form-field>
+  </div>
+  <div class="modal-footer">
+    <span matTooltip="Guardar tipo">
+      <button type="button" class="btn btn-secondary" style="cursor: pointer;" (click)="onClickSaveButton();">
+        <app-icon svgIcon="rubish"></app-icon>
+      </button>
+    </span>  
+    <ngb-alert id = "alert" class = "alert" [dismissible]="false" type="danger">
+    <strong>Atención!</strong> Parece que algo no ha ido bien, intentalo de nuevo más tarde.
+  </ngb-alert>  
+  </div>
+  <mat-spinner id="spinner" class="spinner"></mat-spinner>  
+</ng-template>

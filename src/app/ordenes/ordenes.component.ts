@@ -6,30 +6,29 @@ import {IconComponent} from  '../icon/icon.component';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-tipos',
-  templateUrl: './tipos.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./tipos.component.css',
-  '../../../node_modules/material-design-icons/iconfont/material-icons.css']})
+  selector: 'app-ordenes',
+  templateUrl: './ordenes.component.html',
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.css','./ordenes.component.css',
+   '../../../node_modules/material-design-icons/iconfont/material-icons.css']})
 
-export class TiposComponent implements OnInit {
+export class OrdenesComponent implements OnInit {
 
-private tipos = [];
-private nombreTipo;
-private descripcionTipo;
-private id;
-modalRef;
+	private ordenes = [];
 
-  constructor(private dataService: DataService, private modalService: NgbModal) { }
+	constructor(private dataService: DataService, private modalService: NgbModal) { }
 
   ngOnInit() {
   	console.log('onInit tipos.component');
-		this.dataService.getDatas('tipos').then((response) => {
+		this.dataService.getDatas('ordenes').then((response) => {
 			var data = response.json();
-			this.tipos = data['tipoParte'];
-			console.log(this.tipos);
-		});
+			this.ordenes = data['ordenes'];
+			console.log(this.ordenes);
+		}).catch(error => {
+     	console.log("error " + error);     	
+  		});
+  	}
   }
-openVerticallyCentered(content) {
+/*openVerticallyCentered(content) {
      this.modalRef = this.modalService.open(content,{ centered: true });
   }
 
@@ -82,4 +81,4 @@ openVerticallyCentered(content) {
    console.log(this.nombreTipo);
  }
 
-}
+}*/
