@@ -11,7 +11,7 @@
       </tr>
     </thead> 
     <tbody>
-      <tr *ngFor='let recurso of recursos'>
+      <tr *ngFor='let recurso of recursos'>   
         <td><div class="tooltip" (dblclick)="openVerticallyCentered(content); setDatasRecurso(recurso.nombreRecurso, recurso.apellidosRecurso, recurso.idRecurso, recurso.emailRecurso, recurso.claveRecurso)">{{recurso.nombreRecurso}}<span class="tooltiptext">Doble click para abrir</span></div></td>
         <td><div class="tooltip"><div>{{recurso.apellidosRecurso}}</div><span class="tooltiptext"></span></div></td>
       </tr>    

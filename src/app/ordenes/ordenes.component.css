@@ -1,0 +1,18 @@
+.centrar{
+	margin:0 auto;
+	max-width: 90%;
+	margin-top: 10px;
+	z-index: 1000;
+	border-color: grey;	
+	box-shadow: 10px 5px 5px #D5D0CF;
+
+}
+
+.enLinea{
+	display: inline;
+}
+ [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+    width: 40%;
+  }

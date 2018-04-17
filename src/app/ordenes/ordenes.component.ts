@@ -24,7 +24,7 @@ export class OrdenesComponent implements OnInit {
 			this.ordenes = data['ordenes'];
 			console.log(this.ordenes);
 		}).catch(error => {
-     	console.log("error " + error);     	
+     	console.log("error " + error);     	   
   		});
   	}
   }
